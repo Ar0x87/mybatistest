@@ -4,7 +4,7 @@ package com.null01;
 import java.util.ArrayList;
 
 interface HotelService {
-    public ArrayList getAll();
+    public ArrayList<Hotel> getAll();
 
-    public ArrayList getByName(String name);
+    public ArrayList<Hotel> getByName(String name);
 }

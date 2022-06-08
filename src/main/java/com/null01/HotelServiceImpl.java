@@ -8,11 +8,11 @@ import java.util.ArrayList;
 public class HotelServiceImpl implements HotelService{
 
 
-    public ArrayList getAll(){
+    public ArrayList<Hotel> getAll(){
         return new ArrayList();
     }
 
-    public ArrayList getByName(String name){
+    public ArrayList<Hotel> getByName(String name){
         return new ArrayList();
     }
 }

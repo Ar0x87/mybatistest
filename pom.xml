@@ -58,13 +58,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-test</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>x.y.z</version>
-        </dependency>
-
     </dependencies>
 
     <build>

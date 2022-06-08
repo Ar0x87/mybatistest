@@ -2,7 +2,7 @@ package com.null01;
 
 public class Hotel {
     private Long id;
-    private String hotelName;
+    private String hotelname;
     private String address;
 
     public Long getId() {
@@ -14,11 +14,11 @@ public class Hotel {
     }
 
     public String getHotelName() {
-        return hotelName;
+        return hotelname;
     }
 
-    public void setHotelName(String hotelName) {
-        this.hotelName = hotelName;
+    public void setHotelName(String hotelname) {
+        this.hotelname = hotelname;
     }
 
     public String getAddress() {

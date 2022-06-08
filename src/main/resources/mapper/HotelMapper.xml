@@ -3,18 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.null01.HotelMapper">
-    <resultMap id="Hotel" type="com.null01.Hotel">
+    <resultMap id="HotelResultMap" type="com.null01.Hotel">
         <id column="id" property="id"/>
         <result column="hotelname" property="hotelname"/>
         <result column="address" property="address"/>
     </resultMap>
 
-    <select id="getAll" resultMap="Hotel">
-        SELECT * FROM hotel
+    <select id="getAll" resultMap="HotelResultMap">
+        SELECT id, hotelname, address FROM hotel
     </select>
 
-    <select id="getByName" resultMap="Hotel" parameterType="String">
-        SELECT * FROM hotel
+    <select id="getByName" resultMap="HotelResultMap" parameterType="java.lang.String">
+        SELECT id, hotelname, address  FROM hotel
         WHERE hotelname = #{name}
     </select>
 </mapper>
