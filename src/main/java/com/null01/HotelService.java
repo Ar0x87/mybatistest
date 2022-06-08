@@ -1,12 +1,10 @@
 package com.null01;
 
-import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.ArrayList;
 
-@Service
 interface HotelService {
-    public List<Hotel> getAll();
+    public ArrayList getAll();
 
-    public List<Hotel> getByName(String name);
+    public ArrayList getByName(String name);
 }

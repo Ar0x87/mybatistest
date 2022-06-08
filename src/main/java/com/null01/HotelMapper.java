@@ -2,12 +2,12 @@ package com.null01;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @Mapper
 interface HotelMapper {
 
-    public List<Hotel> getAll();
+    public ArrayList<Hotel> getAll();
 
-    public List<Hotel> getByName(String name);
+    public ArrayList<Hotel> getByName(String name);
 }

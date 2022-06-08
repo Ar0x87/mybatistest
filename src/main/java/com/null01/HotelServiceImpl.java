@@ -1,16 +1,18 @@
 package com.null01;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
+@Service
 public class HotelServiceImpl implements HotelService{
 
 
-    public List<Hotel> getAll(){
-        return new ArrayList<>();
+    public ArrayList getAll(){
+        return new ArrayList();
     }
 
-    public List<Hotel> getByName(String name){
-        return new ArrayList<>();
+    public ArrayList getByName(String name){
+        return new ArrayList();
     }
 }

@@ -5,7 +5,7 @@
 <mapper namespace="com.null01.HotelMapper">
     <resultMap id="Hotel" type="com.null01.Hotel">
         <id column="id" property="id"/>
-        <result column="hotel_name" property="hotelName"/>
+        <result column="hotelname" property="hotelname"/>
         <result column="address" property="address"/>
     </resultMap>
 
@@ -15,6 +15,6 @@
 
     <select id="getByName" resultMap="Hotel" parameterType="String">
         SELECT * FROM hotel
-        WHERE hotelname = #{param1}
+        WHERE hotelname = #{name}
     </select>
 </mapper>
