@@ -7,24 +7,20 @@ plugins {
     id 'maven-publish'
 }
 
-jar {
-        manifest {
-            attributes 'Main-Class': 'com.null01.MybatistestApplication'
-        }
-    }
 repositories {
     mavenLocal()
     maven {
         url = uri('https://repo.maven.apache.org/maven2/')
     }
-    mavenCentral()
 }
 
 dependencies {
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.0'
     implementation 'junit:junit:4.13.2'
     implementation 'org.springframework:spring-test:5.3.20'
     implementation 'org.springframework.boot:spring-boot-test:2.7.0'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     runtimeOnly 'org.postgresql:postgresql:42.3.5'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.0'
 }

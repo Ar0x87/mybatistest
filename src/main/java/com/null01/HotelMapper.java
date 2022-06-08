@@ -6,7 +6,8 @@ import java.util.List;
 
 @Mapper
 public interface HotelMapper {
-    default List<Hotel> getAll() {
-        return null;
-    }
+
+    public List<Hotel> getAll();
+
+    public List<Hotel> getByName(String name);
 }
