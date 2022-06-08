@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface HotelService {
-    /*public List<Hotel> getAll();
+interface HotelService {
+    public List<Hotel> getAll();
 
-    public List<Hotel> getByName(String name);*/
+    public List<Hotel> getByName(String name);
 }

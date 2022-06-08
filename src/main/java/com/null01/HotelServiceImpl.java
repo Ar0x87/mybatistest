@@ -5,6 +5,7 @@ import java.util.List;
 
 public class HotelServiceImpl implements HotelService{
 
+
     public List<Hotel> getAll(){
         return new ArrayList<>();
     }
