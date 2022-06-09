@@ -1,10 +1,20 @@
 package com.null01.mappers;
 
 import com.null01.models.Hotel;
+import java.util.ArrayList;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+/**
+ * Mapper interface that allows work with SQL.
+ * Must have an XML analog which contain the syntax of SQL queries,
+ * bounded with methods from Mapper.java by id's.
+ * Required to be contained in src.main.java."main_catalog".mappers.
+ *
+ * @Authors Vladimir, Evgeniy
+ * @Version 1.0
+ * @Since 09.06.2022
+ */
 
 @Mapper
 @Repository

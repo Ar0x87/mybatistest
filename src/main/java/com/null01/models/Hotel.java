@@ -1,5 +1,14 @@
 package com.null01.models;
 
+/**
+ * Model of the object in database.
+ * Provides the comprehension between SQL and Java.
+ *
+ * @Authors Vladimir, Evgeniy
+ * @Version 1.0
+ * @Since 09.06.2022
+ */
+
 public class Hotel {
     private Long id;
     private String hotelname;
