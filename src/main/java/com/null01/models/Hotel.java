@@ -1,4 +1,4 @@
-package com.null01;
+package com.null01.models;
 
 public class Hotel {
     private Long id;

@@ -1,5 +1,7 @@
-package com.null01;
+package com.null01.rest;
 
+import com.null01.services.HotelService;
+import com.null01.models.Hotel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,19 +14,20 @@ import java.util.ArrayList;
 @RestController
 @RequiredArgsConstructor
 public class HotelController {
+
     @Autowired
     private HotelService hotelService;
 
     @GetMapping
     @RequestMapping( "/getAll")
-    public ArrayList<Hotel> getAll(){
-         return  hotelService.getAll();
+    final ArrayList<Hotel> getAll(){
+         return hotelService.getAll();
+    }
 
-        }
     @GetMapping
     @RequestMapping("/getByName")
-    public ArrayList<Hotel> getByName(@RequestParam(value = "name", required = true)String name){
-        return  hotelService.getByName(name);
+    final ArrayList<Hotel> getByName(@RequestParam(value = "name")String name){
+        return hotelService.getByName(name);
     }
 
     }

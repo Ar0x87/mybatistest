@@ -5,6 +5,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'io.franzbecker.gradle-lombok' version '1.14'
 }
 
 repositories {
@@ -12,6 +13,7 @@ repositories {
     maven {
         url = uri('https://repo.maven.apache.org/maven2/')
     }
+    jcenter()
 }
 
 dependencies {
@@ -31,6 +33,11 @@ group = 'com.null01'
 version = '0.0.1-SNAPSHOT'
 description = 'mybatistest'
 java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+lombok {
+    version = '1.18.20'
+    sha256 = ""
+}
 
 publishing {
     publications {
