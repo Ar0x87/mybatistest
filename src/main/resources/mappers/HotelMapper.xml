@@ -14,7 +14,7 @@
     </select>
 
     <select id="getByName" resultMap="HotelResultMap" parameterType="java.lang.String">
-        SELECT id, hotelname, address  FROM hotel
-        WHERE hotelname LIKE #{name}
+        SELECT id, hotelname, address FROM hotel
+        WHERE lower(hotelname) LIKE lower(#{name})
     </select>
 </mapper>

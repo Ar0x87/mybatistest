@@ -19,6 +19,6 @@ public class HotelServiceImpl implements HotelService{
     }
 
     public final ArrayList<Hotel> getByName(String name){
-        return hotelmapper.getByName(name);
+        return hotelmapper.getByName('%' +name +'%');
     }
 }
