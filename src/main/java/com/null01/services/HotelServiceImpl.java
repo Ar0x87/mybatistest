@@ -3,8 +3,10 @@ package com.null01.services;
 import com.null01.mappers.HotelMapper;
 import com.null01.models.Hotel;
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.null01.models.RequestStructure;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +18,12 @@ import org.springframework.stereotype.Service;
  * @Version 1.0
  * @Since 09.06.2022
  */
-
+@RequiredArgsConstructor
 @Service
 public class HotelServiceImpl implements HotelService {
 
     @Autowired
-    private HotelMapper hotelmapper;
+    private final HotelMapper hotelmapper;
 
     public final ArrayList<Hotel> getAll() {
         return hotelmapper.getAll();
@@ -32,6 +34,7 @@ public class HotelServiceImpl implements HotelService {
     }
 
     public final Integer postJ(RequestStructure reqBod){
-        return hotelmapper.postJ(reqBod);
+
+        return hotelmapper.postJ(Map.of(reqBod.getHotelname(), reqBod.getAddress()));
     }
 }
