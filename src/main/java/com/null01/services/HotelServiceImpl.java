@@ -3,6 +3,8 @@ package com.null01.services;
 import com.null01.mappers.HotelMapper;
 import com.null01.models.Hotel;
 import java.util.ArrayList;
+
+import com.null01.models.RequestStructure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +31,7 @@ public class HotelServiceImpl implements HotelService {
         return hotelmapper.getByName('%' + name + '%');
     }
 
-    public final ArrayList<Hotel> postJ(Hotel newH){
-        return hotelmapper.postJ(newH);
+    public final Integer postJ(RequestStructure reqBod){
+        return hotelmapper.postJ(reqBod);
     }
 }

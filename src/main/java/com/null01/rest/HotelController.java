@@ -1,6 +1,7 @@
 package com.null01.rest;
 
 import com.null01.models.Hotel;
+import com.null01.models.RequestStructure;
 import com.null01.services.HotelService;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +41,8 @@ public class HotelController {
     }
 
     @PostMapping(value = "/postJ", consumes = "application/json", produces = "application/json")
-    final ArrayList<Hotel> postJ(@RequestBody Hotel newH) {
-        return hotelService.postJ(newH);
+    final Integer postJ(@RequestBody RequestStructure reqBod) {
+        return hotelService.postJ(reqBod);
     }
+
 }

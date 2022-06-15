@@ -1,6 +1,8 @@
 package com.null01.services;
 
 import com.null01.models.Hotel;
+import com.null01.models.RequestStructure;
+
 import java.util.ArrayList;
 
 /**
@@ -17,6 +19,6 @@ public interface HotelService {
 
     ArrayList<Hotel> getByName(String name);
 
-    ArrayList<Hotel> postJ(Hotel newH);
+    Integer postJ(RequestStructure reqBod);
 
 }

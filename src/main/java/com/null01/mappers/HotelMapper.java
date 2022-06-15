@@ -2,6 +2,8 @@ package com.null01.mappers;
 
 import com.null01.models.Hotel;
 import java.util.ArrayList;
+
+import com.null01.models.RequestStructure;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -24,5 +26,5 @@ public interface HotelMapper {
 
     ArrayList<Hotel> getByName(String name);
 
-    ArrayList<Hotel> postJ(Hotel newH);
+    Integer postJ(RequestStructure reqBod);
 }
