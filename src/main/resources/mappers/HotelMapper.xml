@@ -19,6 +19,7 @@
     </select>
 
     <select id="postJ" resultMap="HotelResultMap" parameterType="Hotel.getClass()">
-
+        INSERT INTO hotel(id, hotelname, address) VALUES ((select max(id) + 1 from hotel), #{newH.getHotelName}, #{newH.getAddress});
+        select * from hotel;
     </select>
 </mapper>
