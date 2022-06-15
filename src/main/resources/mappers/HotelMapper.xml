@@ -17,4 +17,8 @@
         SELECT id, hotelname, address FROM hotel
         WHERE lower(hotelname) LIKE lower(#{name})
     </select>
+
+    <select id="postJ" resultMap="HotelResultMap" parameterType="Hotel.getClass()">
+
+    </select>
 </mapper>

@@ -5,10 +5,10 @@ import com.null01.services.HotelService;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Controller class.
@@ -37,5 +37,10 @@ public class HotelController {
     @RequestMapping("/getByName")
     final ArrayList<Hotel> getByName(@RequestParam(value = "name")String name) {
         return hotelService.getByName(name);
+    }
+
+    @PostMapping(value = "/postJ", consumes = "application/json", produces = "application/json")
+    final ArrayList<Hotel> postJ(@RequestBody Hotel newH) {
+        return hotelService.postJ(newH);
     }
 }
