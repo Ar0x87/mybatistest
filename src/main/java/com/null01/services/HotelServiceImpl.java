@@ -35,6 +35,6 @@ public class HotelServiceImpl implements HotelService {
 
     public final Integer postJ(RequestStructure reqBod){
 
-        return hotelmapper.postJ(Map.of(reqBod.getHotelname(), reqBod.getAddress()));
+        return hotelmapper.postJ(Map.of("hotel", reqBod.getHotelname(), "address", reqBod.getAddress()));
     }
 }
