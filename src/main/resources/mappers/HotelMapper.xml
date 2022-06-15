@@ -18,8 +18,8 @@
         WHERE lower(hotelname) LIKE lower(#{name})
     </select>
 
-    <select id="postJ" resultMap="HotelResultMap" parameterType="Hotel.getClass()">
-        INSERT INTO hotel(id, hotelname, address) VALUES ((select max(id) + 1 from hotel), #{newH.getHotelName}, #{newH.getAddress});
+    <select id="postJ" resultMap="HotelResultMap" parameterType="RequestStructure.getClass()">
+        INSERT INTO hotel(id, hotelname, address) VALUES ((select max(id) + 1 from hotel), #{reqBod.gethotelname}, #{reqBod.getaddress});
         select * from hotel;
     </select>
 </mapper>
