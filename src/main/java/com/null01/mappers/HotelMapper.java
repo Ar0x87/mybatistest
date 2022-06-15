@@ -23,4 +23,6 @@ public interface HotelMapper {
     ArrayList<Hotel> getAll();
 
     ArrayList<Hotel> getByName(String name);
+
+    ArrayList<Hotel> postJ(Hotel newH);
 }

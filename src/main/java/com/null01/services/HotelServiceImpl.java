@@ -28,4 +28,8 @@ public class HotelServiceImpl implements HotelService {
     public final ArrayList<Hotel> getByName(String name) {
         return hotelmapper.getByName('%' + name + '%');
     }
+
+    public final ArrayList<Hotel> postJ(Hotel newH){
+        return hotelmapper.postJ(newH);
+    }
 }

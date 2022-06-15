@@ -17,4 +17,6 @@ public interface HotelService {
 
     ArrayList<Hotel> getByName(String name);
 
+    ArrayList<Hotel> postJ(Hotel newH);
+
 }
