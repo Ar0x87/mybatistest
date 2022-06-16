@@ -19,7 +19,11 @@
     </select>
 
     <select id="postJ" resultType="java.lang.Integer" parameterType="java.util.Map">
-        INSERT INTO hotel(id, hotelname, address) VALUES ((select max(id) + 1 from hotel), #{hotelname} , #{address} );
-        select max(id) from hotel;
+        INSERT INTO hotel(id, hotelname, address) VALUES ((SELECT max(id) + 1 FROM hotel), #{hotelname} , #{address} );
+        SELECT max(id) FROM hotel;
+    </select>
+
+    <select id="checkAuxiliaryGBN" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT id FROM hotel WHERE hotelname = #{name};
     </select>
 </mapper>

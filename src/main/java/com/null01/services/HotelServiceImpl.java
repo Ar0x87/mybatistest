@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.null01.models.RequestStructure;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +33,7 @@ public class HotelServiceImpl implements HotelService {
         return hotelmapper.getByName('%' + name + '%');
     }
 
-    public final Integer postJ(@NonNull RequestStructure reqBod){
+    public final Integer postJ(RequestStructure reqBod){
 
         return hotelmapper.postJ(Map.of("hotelname", reqBod.hotelname, "address", reqBod.address));
     }
