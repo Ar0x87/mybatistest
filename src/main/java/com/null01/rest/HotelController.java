@@ -6,6 +6,7 @@ import com.null01.services.HotelService;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -37,7 +38,7 @@ public class HotelController {
         return hotelService.getByName(name);
     }
 
-    @PostMapping(value = "/postJ", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/postJ", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Integer postJ(@RequestBody RequestStructure reqBod) {
         return hotelService.postJ(reqBod);
     }
