@@ -21,4 +21,6 @@ public interface HotelService {
 
     Integer postJ(RequestStructure reqBod);
 
+    Integer checkAuxiliaryGBN(String hotelname);
+
 }

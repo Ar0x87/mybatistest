@@ -5,6 +5,7 @@ import com.null01.models.RequestStructure;
 import com.null01.services.HotelService;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class HotelController {
 
+    int flag;
+
     @Autowired
     private final HotelService hotelService;
 
@@ -34,13 +37,17 @@ public class HotelController {
 
     @GetMapping
     @RequestMapping("/getByName")
-    public ArrayList<Hotel> getByName(@RequestParam(value = "name")String name) {
+    public ArrayList<Hotel> getByName(@RequestParam(value = "name") String name) {
         return hotelService.getByName(name);
     }
 
     @PostMapping(value = "/postJ", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Integer postJ(@RequestBody RequestStructure reqBod) {
         return hotelService.postJ(reqBod);
+    }
+
+    public Integer checkAuxiliryGBN(String hotelname){
+        return hotelService.checkAuxiliaryGBN(hotelname);
     }
 
 }

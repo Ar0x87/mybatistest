@@ -33,8 +33,11 @@ public class HotelServiceImpl implements HotelService {
         return hotelmapper.getByName('%' + name + '%');
     }
 
-    public final Integer postJ(RequestStructure reqBod){
-
+    public final Integer postJ(RequestStructure reqBod) {
         return hotelmapper.postJ(Map.of("hotelname", reqBod.hotelname, "address", reqBod.address));
+    }
+
+    public final Integer checkAuxiliaryGBN(String name) {
+        return hotelmapper.checkAuxiliaryGBN(name);
     }
 }

@@ -28,6 +28,6 @@ public interface HotelMapper {
 
     Integer postJ(Map<String, String> jSS);
 
-    Integer checkAuxiliaryGBN(String name);
+    Integer checkAuxiliaryGBN(String hotelname);
 
 }
