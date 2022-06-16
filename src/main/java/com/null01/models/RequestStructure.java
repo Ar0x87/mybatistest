@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 
 public class RequestStructure {
-    Integer id;
     String hotelname;
     String address;
 }
