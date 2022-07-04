@@ -27,7 +27,7 @@
                 ELSE
                     PERFORM pg_cancel_backend(1);
                 END IF;
-                RETURN (SELECT max(id) FROM hotel);
+                RETURN (SELECT id FROM hotel WHERE hotelname = $1);
             END;
         $$ LANGUAGE plpgsql;
 
