@@ -21,6 +21,6 @@ public interface HotelService {
 
     Integer postJ(RequestStructure reqBod);
 
-    Integer existanceCheck(String hotelname);
+    Integer getIdByName(String name);
 
 }

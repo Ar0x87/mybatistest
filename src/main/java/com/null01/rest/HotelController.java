@@ -46,8 +46,4 @@ public class HotelController {
         return hotelService.postJ(reqBod);
     }
 
-    public Integer existanceCheck(String hotelname){
-        return hotelService.existanceCheck(hotelname);
-    }
-
 }

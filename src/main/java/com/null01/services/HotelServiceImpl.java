@@ -35,15 +35,19 @@ public class HotelServiceImpl implements HotelService {
     }
 
     public final Integer postJ(RequestStructure reqBod) {
-        if (existanceCheck(reqBod.hotelname) == 0){
-           poster
+        int rslt = 0;
+        if (getIdByName(reqBod.hotelname) == 0){
+           poster(reqBod);
+           rslt = getIdByName(reqBod.hotelname);
         }
+        return rslt;
     }
 
-    public final Integer existanceCheck(String name) {
-        return hotelmapper.existanceCheck(name);
+    public final Integer getIdByName(String name) {
+        return hotelmapper.getIdByName(name);
     }
 
     public final void poster(RequestStructure reqBod) {
     }
+
 }

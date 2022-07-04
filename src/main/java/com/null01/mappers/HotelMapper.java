@@ -28,6 +28,6 @@ public interface HotelMapper {
 
     Integer postJ(Map<String, String> jSS);
 
-    Integer existanceCheck(String hotelname);
+    Integer getIdByName(String name);
 
 }

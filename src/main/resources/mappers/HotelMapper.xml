@@ -22,11 +22,12 @@
         INSERT INTO hotel
         (hotelname, address)
         VALUES
-        ()
+        (#(hotelname), #(address))
     </select>
 
-    <select id="existanceCheck" resultType="java.lang.Integer" parameterType="java.lang.String">
+    <select id="getIdByName" resultType="java.lang.Integer" parameterType="java.lang.String">
         SELECT id FROM hotel
         WHERE hotelname = #{name}
     </select>
+
 </mapper>
