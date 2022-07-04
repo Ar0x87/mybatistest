@@ -35,9 +35,9 @@ public class HotelServiceImpl implements HotelService {
     }
 
     public final Integer postJ(RequestStructure reqBod) {
-        int rslt;
-        if (getIdByName(reqBod.hotelname) == 0){
-            poster(reqBod);
+        Integer rslt;
+        if (getIdByName(reqBod.hotelname) == null){
+            hotelmapper.poster(Map.of("hotelname", reqBod.hotelname, "address", reqBod.address));
             rslt = getIdByName(reqBod.hotelname);
         } else {
             rslt = 666;
