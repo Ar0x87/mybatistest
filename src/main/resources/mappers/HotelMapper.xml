@@ -19,7 +19,7 @@
     </select>
 
     <select id="poster" resultType="java.lang.Integer" parameterType="java.util.Map">
-        INSERT INTO hotel(id, hotelname, address) VALUES ((SELECT max(id) + 1 from hotel), #{hotelname} , #{address} );
+        INSERT INTO hotel(id, hotelname, address) VALUES ((SELECT max(id) + 1 FROM hotel), #{hotelname} , #{address} );
     </select>
 
     <select id="getIdByName" resultType="java.lang.Integer" parameterType="java.lang.String">

@@ -23,4 +23,6 @@ public interface HotelService {
 
     Integer getIdByName(String name);
 
+    void poster(RequestStructure reqBod);
+
 }

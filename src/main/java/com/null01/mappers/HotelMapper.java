@@ -30,4 +30,6 @@ public interface HotelMapper {
 
     Integer getIdByName(String name);
 
+    void poster(Map<String, String> jSS);
+
 }
