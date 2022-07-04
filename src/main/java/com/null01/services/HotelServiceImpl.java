@@ -40,7 +40,7 @@ public class HotelServiceImpl implements HotelService {
             hotelmapper.poster(Map.of("hotelname", reqBod.hotelname, "address", reqBod.address));
             rslt = getIdByName(reqBod.hotelname);
         } else {
-            rslt = 666;
+            rslt = -1;
         }
         return rslt;
     }
