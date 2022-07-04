@@ -18,11 +18,15 @@
         WHERE lower(hotelname) LIKE lower(#{name})
     </select>
 
-    <select id="postJ" resultType="java.lang.Integer" parameterType="java.util.Map">
-
+    <select id="poster" resultType="java.lang.Integer" parameterType="java.util.Map">
+        INSERT INTO hotel
+        (hotelname, address)
+        VALUES
+        ()
     </select>
 
-    <select id="checkAuxiliaryGBN" resultType="java.lang.Integer" parameterType="java.lang.String">
-
+    <select id="existanceCheck" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT id FROM hotel
+        WHERE hotelname = #{name}
     </select>
 </mapper>

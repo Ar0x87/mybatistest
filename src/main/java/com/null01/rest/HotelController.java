@@ -46,8 +46,8 @@ public class HotelController {
         return hotelService.postJ(reqBod);
     }
 
-    public Integer checkAuxiliryGBN(String hotelname){
-        return hotelService.checkAuxiliaryGBN(hotelname);
+    public Integer existanceCheck(String hotelname){
+        return hotelService.existanceCheck(hotelname);
     }
 
 }

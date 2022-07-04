@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.null01.models.RequestStructure;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,10 +35,15 @@ public class HotelServiceImpl implements HotelService {
     }
 
     public final Integer postJ(RequestStructure reqBod) {
-        return hotelmapper.postJ(Map.of("hotelname", reqBod.hotelname, "address", reqBod.address));
+        if (existanceCheck(reqBod.hotelname) == 0){
+           poster
+        }
     }
 
-    public final Integer checkAuxiliaryGBN(String name) {
-        return hotelmapper.checkAuxiliaryGBN(name);
+    public final Integer existanceCheck(String name) {
+        return hotelmapper.existanceCheck(name);
+    }
+
+    public final void poster(RequestStructure reqBod) {
     }
 }
