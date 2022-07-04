@@ -35,10 +35,12 @@ public class HotelServiceImpl implements HotelService {
     }
 
     public final Integer postJ(RequestStructure reqBod) {
-        int rslt = 0;
+        int rslt;
         if (getIdByName(reqBod.hotelname) == 0){
-           poster(reqBod);
-           rslt = getIdByName(reqBod.hotelname);
+            poster(reqBod);
+            rslt = getIdByName(reqBod.hotelname);
+        } else {
+            rslt = 666;
         }
         return rslt;
     }

@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class HotelController {
 
-    int flag;
 
     @Autowired
     private final HotelService hotelService;
