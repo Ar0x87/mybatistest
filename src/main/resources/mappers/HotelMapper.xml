@@ -19,8 +19,18 @@
     </select>
 
     <select id="postJ" resultType="java.lang.Integer" parameterType="java.util.Map">
-        FUNCTION
-        INSERT INTO hotel(id, hotelname, address) VALUES ((select max(id) + 1 from hotel), #{hotelname} , #{address} );
-        select max(id) from hotel;
+        CREATE OR REPLACE FUNCTION postJ(varchar(30), varchar(20)) RETURNS INTEGER AS $$
+            BEGIN
+                IF ((SELECT hotelname AS vibor FROM hotel WHERE hotelname = $1) IS NULL)
+                THEN
+                    INSERT INTO hotel(id, hotelname, address) VALUES ((SELECT max(id) + 1 from hotel), $1 , $2 );
+                ELSE
+                    PERFORM pg_cancel_backend(1);
+                END IF;
+                RETURN (SELECT max(id) FROM hotel);
+            END;
+        $$ LANGUAGE plpgsql;
+
+        SELECT postJ(#{hotelname}, #{address});
     </select>
 </mapper>
