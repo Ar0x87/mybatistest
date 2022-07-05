@@ -43,4 +43,9 @@ public class HotelController {
         return hotelService.postJ(reqBod);
     }
 
+    @PutMapping(value = "/putJ", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ArrayList<Hotel> putJ(@RequestBody Integer id, RequestStructure reqBod) {
+        return hotelService.putJ(id, reqBod);
+    }
+
 }

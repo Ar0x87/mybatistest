@@ -28,4 +28,5 @@ public interface HotelMapper {
 
     Integer postJ(Map<String, String> jSS);
 
+    ArrayList<Hotel> putJ(Integer id, Map<String, String> jSS);
 }

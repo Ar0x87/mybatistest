@@ -21,4 +21,6 @@ public interface HotelService {
 
     Integer postJ(RequestStructure reqBod);
 
+    ArrayList<Hotel> putJ(Integer id, RequestStructure reqBod);
+
 }
