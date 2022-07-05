@@ -25,7 +25,7 @@
                 THEN
                     INSERT INTO hotel(id, hotelname, address) VALUES ((SELECT max(id) + 1 from hotel), $1 , $2 );
                 ELSE
-                    PERFORM pg_cancel_backend(1);
+                    SELECT pg_cancel_backend(1);
                 END IF;
                 RETURN (SELECT id FROM hotel WHERE hotelname = $1);
             END;
