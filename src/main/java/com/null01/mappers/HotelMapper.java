@@ -32,4 +32,8 @@ public interface HotelMapper {
 
     void poster(Map<String, String> jSS);
 
+    void puter(Map<String, String> jSS);
+
+    Integer checkIdExistance(Integer cie);
+
 }

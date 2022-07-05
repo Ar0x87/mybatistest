@@ -29,4 +29,15 @@
     <select id="postJ" resultType="java.lang.Integer" parameterType="java.util.Map">
     </select>
 
+    <select id="puter" resultType="java.lang.Integer" parameterType="java.util.Map">
+        UPDATE hotel SET hotelname = #{hotelname}, address = #{address} WHERE id = CAST(#{id} AS INTEGER );
+    </select>
+
+    <select id="checkIdExistance" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        SELECT id FROM hotel WHERE id = #{cie}
+    </select>
+
+    <select id="putJ" resultType="java.lang.Integer" parameterType="java.util.Map">
+    </select>
+
 </mapper>

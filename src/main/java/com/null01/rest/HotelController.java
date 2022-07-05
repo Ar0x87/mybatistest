@@ -2,6 +2,7 @@ package com.null01.rest;
 
 import com.null01.models.Hotel;
 import com.null01.models.RequestStructure;
+import com.null01.models.RequestStructureFullLine;
 import com.null01.services.HotelService;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,11 @@ public class HotelController {
     @PostMapping(value = "/postJ", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Integer postJ(@RequestBody RequestStructure reqBod) {
         return hotelService.postJ(reqBod);
+    }
+
+    @PutMapping(value = "/putJ", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Integer putJ(@RequestBody RequestStructureFullLine reqLin) {
+        return hotelService.putJ(reqLin);
     }
 
 }
