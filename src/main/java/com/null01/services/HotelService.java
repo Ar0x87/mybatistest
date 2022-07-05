@@ -2,6 +2,7 @@ package com.null01.services;
 
 import com.null01.models.Hotel;
 import com.null01.models.RequestStructure;
+import com.null01.models.RequestStructureFullLine;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,6 @@ public interface HotelService {
 
     Integer postJ(RequestStructure reqBod);
 
-    ArrayList<Hotel> putJ(Integer id, RequestStructure reqBod);
+    Integer putJ(RequestStructureFullLine reqLin);
 
 }

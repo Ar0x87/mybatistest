@@ -34,8 +34,8 @@
         SELECT postJ(#{hotelname}, #{address});
     </select>
 
-    <select id="putJ" resultType="HotelResultMap" parameterType="java.util.Map">
-        CREATE OR REPLACE FUNCTION putJ(integer, varchar(30), varchar(20)) RETURNS VOID AS $$
+    <select id="putJ" resultType="java.lang.Integer" parameterType="java.util.Map">
+        CREATE OR REPLACE FUNCTION putJ(integer, varchar(30), varchar(20)) RETURNS INTEGER AS $$
             BEGIN
                 IF ((SELECT id FROM hotel WHERE id = $1) IS NOT NULL)
                 THEN
@@ -43,10 +43,10 @@
                 ELSE
                     SELECT pg_cancel_backend(1);
                 END IF;
+            RETURN (SELECT id FROM hotel WHERE id = $1);
             END;
         $$ LANGUAGE plpgsql;
 
-        SELECT putJ(#{id}, #{hotelname}, #{address});
-        SELECT id, hotelname, address FROM hotel;
+        SELECT putJ(CAST(#{id} AS INTEGER), #{hotelname}, #{address});
     </select>
 </mapper>
