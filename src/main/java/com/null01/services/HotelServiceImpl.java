@@ -1,14 +1,15 @@
 package com.null01.services;
 
+import com.null01.Exeptions.AlreadyExistExeption;
 import com.null01.mappers.HotelMapper;
 import com.null01.models.Hotel;
+
 import java.util.ArrayList;
 import java.util.Map;
 
 import com.null01.models.RequestStructure;
 import com.null01.models.RequestStructureFullLine;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,13 +40,13 @@ public class HotelServiceImpl implements HotelService {
 
     //Main Logic of "additionalMethodLogic" branch
 
-   public final Integer postJ(RequestStructure reqBod) {
-        Integer rslt;
-        if (getIdByName(reqBod.getHotelname()) == null) {
+    public final Integer postJ(RequestStructure reqBod) throws AlreadyExistExeption  {
+        Integer rslt = getIdByName(reqBod.getHotelname());
+        if (rslt != null){
+            throw new AlreadyExistExeption("Already exist");
+        } else {
             hotelmapper.poster(Map.of("hotelname", reqBod.getHotelname(), "address", reqBod.getAddress()));
             rslt = getIdByName(reqBod.getHotelname());
-        } else {
-            rslt = -1;
         }
         return rslt;
     }

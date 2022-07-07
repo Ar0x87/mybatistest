@@ -1,11 +1,13 @@
 package com.null01.rest;
 
+import com.null01.Exeptions.AlreadyExistExeption;
 import com.null01.models.Hotel;
 import com.null01.models.RequestStructure;
 import com.null01.models.RequestStructureFullLine;
 import com.null01.services.HotelService;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -43,7 +45,14 @@ public class HotelController {
 
     @PostMapping(value = "/postJ", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Integer postJ(@RequestBody RequestStructure reqBod) {
-        return hotelService.postJ(reqBod);
+        Integer post = null;
+        try {
+            post = hotelService.postJ(reqBod);
+            return post;
+        } catch (AlreadyExistExeption e) {
+            e.printStackTrace();
+        }
+        return post;
     }
 
     @PutMapping(value = "/putJ", consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -1,5 +1,6 @@
 package com.null01.services;
 
+import com.null01.Exeptions.AlreadyExistExeption;
 import com.null01.models.Hotel;
 import com.null01.models.RequestStructure;
 import com.null01.models.RequestStructureFullLine;
@@ -20,9 +21,9 @@ public interface HotelService {
 
     ArrayList<Hotel> getByName(String name);
 
-    Integer postJ(RequestStructure reqBod);
+    Integer postJ(RequestStructure reqBod) throws AlreadyExistExeption;
 
-    Integer getIdByName(String name);
+    Integer getIdByName(String name) throws AlreadyExistExeption;
 
     void poster(RequestStructure reqBod);
 
