@@ -57,7 +57,15 @@ public class HotelController {
 
     @PutMapping(value = "/putJ", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Integer putJ(@RequestBody RequestStructureFullLine reqLin) {
-        return hotelService.putJ(reqLin);
+        Integer put = null;
+        try {
+            put = hotelService.putJ(reqLin);
+            return put;
+        }
+        catch (NullPointerException a) {
+            a.printStackTrace();
+        }
+        return put;
     }
 
 }

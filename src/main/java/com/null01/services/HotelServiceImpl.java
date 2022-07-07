@@ -51,13 +51,13 @@ public class HotelServiceImpl implements HotelService {
         return rslt;
     }
 
-   public final Integer putJ(RequestStructureFullLine reqLin) {
-        Integer rslt;
-        if (checkIdExistance(valueOf(reqLin.getId())) != null) {
+   public final Integer putJ(RequestStructureFullLine reqLin) throws NullPointerException{
+        Integer rslt = checkIdExistance(valueOf(reqLin.getId()));
+        if (rslt == null) {
+            throw new NullPointerException("There is no such ID");
+        } else {
             hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", reqLin.getAddress()));
             rslt = valueOf(reqLin.getId());
-        } else {
-            rslt = -1;
         }
         return rslt;
     }
