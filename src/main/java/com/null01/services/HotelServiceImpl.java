@@ -41,9 +41,9 @@ public class HotelServiceImpl implements HotelService {
 
     public final Integer postJ(RequestStructure reqBod) {
         Integer rslt;
-        if (getIdByName(reqBod.hotelname) == null) {
-            hotelmapper.poster(Map.of("hotelname", reqBod.hotelname, "address", reqBod.address));
-            rslt = getIdByName(reqBod.hotelname);
+        if (getIdByName(reqBod.getHotelname()) == null) {
+            hotelmapper.poster(Map.of("hotelname", reqBod.getHotelname(), "address", reqBod.getAddress()));
+            rslt = getIdByName(reqBod.getHotelname());
         } else {
             rslt = -1;
         }
@@ -52,9 +52,9 @@ public class HotelServiceImpl implements HotelService {
 
     public final Integer putJ(RequestStructureFullLine reqLin) {
         Integer rslt;
-        if (checkIdExistance(valueOf(reqLin.id)) != null) {
-            hotelmapper.puter(Map.of("id", reqLin.id, "hotelname", reqLin.hotelname, "address", reqLin.address));
-            rslt = valueOf(reqLin.id);
+        if (checkIdExistance(valueOf(reqLin.getId())) != null) {
+            hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", reqLin.getAddress()));
+            rslt = valueOf(reqLin.getId());
         } else {
             rslt = -1;
         }

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 
 public class RequestStructureFullLine {
-    public String id;
-    public String hotelname;
-    public String address;
+    private String id;
+    private String hotelname;
+    private String address;
 }
