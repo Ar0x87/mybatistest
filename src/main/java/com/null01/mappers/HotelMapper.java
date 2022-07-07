@@ -28,12 +28,15 @@ public interface HotelMapper {
 
     Integer postJ(Map<String, String> jSS);
 
+    Integer putJ(Map<String, String> jSS);
+
     Integer getIdByName(String name);
+
+    Integer checkIdExistance(Integer cie);
 
     void poster(Map<String, String> jSS);
 
     void puter(Map<String, String> jSS);
 
-    Integer checkIdExistance(Integer cie);
 
 }

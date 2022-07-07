@@ -34,12 +34,12 @@ public class HotelServiceImpl implements HotelService {
     }
 
     public final ArrayList<Hotel> getByName(String name) {
-        return hotelmapper.getByName('%' + name + '%');
+        return hotelmapper.getByName(name);
     }
 
     //Main Logic of "additionalMethodLogic" branch
 
-    public final Integer postJ(RequestStructure reqBod) {
+   public final Integer postJ(RequestStructure reqBod) {
         Integer rslt;
         if (getIdByName(reqBod.getHotelname()) == null) {
             hotelmapper.poster(Map.of("hotelname", reqBod.getHotelname(), "address", reqBod.getAddress()));
@@ -50,7 +50,7 @@ public class HotelServiceImpl implements HotelService {
         return rslt;
     }
 
-    public final Integer putJ(RequestStructureFullLine reqLin) {
+   public final Integer putJ(RequestStructureFullLine reqLin) {
         Integer rslt;
         if (checkIdExistance(valueOf(reqLin.getId())) != null) {
             hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", reqLin.getAddress()));

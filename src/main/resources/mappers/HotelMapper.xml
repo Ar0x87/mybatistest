@@ -15,15 +15,16 @@
 
     <select id="getByName" resultMap="HotelResultMap" parameterType="java.lang.String">
         SELECT id, hotelname, address FROM hotel
-        WHERE lower(hotelname) LIKE lower(#{name})
+        WHERE lower(hotelname) LIKE lower(concat('%', #{name}, '%'));
     </select>
 
     <select id="poster" resultType="java.lang.Integer" parameterType="java.util.Map">
-        INSERT INTO hotel(id, hotelname, address) VALUES ((SELECT max(id) + 1 FROM hotel), #{hotelname} , #{address} );
+        SELECT setval('hotel_id_seq', (SELECT max(id) FROM hotel));
+        INSERT INTO hotel(id, hotelname, address) VALUES (nextval('hotel_id_seq'), #{hotelname} , #{address} );
     </select>
 
     <select id="getIdByName" resultType="java.lang.Integer" parameterType="java.lang.String">
-        SELECT id FROM hotel WHERE hotelname = #{name}
+        SELECT id FROM hotel WHERE hotelname = #{name};
     </select>
 
     <select id="postJ" resultType="java.lang.Integer" parameterType="java.util.Map">
