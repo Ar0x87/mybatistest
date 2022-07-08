@@ -42,6 +42,6 @@ public interface HotelMapper {
 
     Integer delJ(Integer id);
 
-    //Integer delJ(String hName);
+    Integer delJ(String name);
 
 }

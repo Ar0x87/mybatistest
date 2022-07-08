@@ -67,7 +67,7 @@ public class HotelController {
     }
 
     @DeleteMapping
-    @RequestMapping("/delJ")
+    @RequestMapping(value = "/delJ", params = {"id"})
     public Integer delJ(@RequestParam(value = "id")Integer id) {
         Integer del = null;
         try {
@@ -79,19 +79,19 @@ public class HotelController {
         }
         return del;
     }
-/*
+
     @DeleteMapping
-    @RequestMapping("/delJ")
-    public Integer delJ(@RequestParam(value = "hName")String hName) {
+    @RequestMapping(value = "/delJ", params = {"name"})
+    public Integer delJ(@RequestParam(value = "name")String name) {
         Integer del = null;
         try {
-            del = hotelService.delJ(hName);
+            del = hotelService.delJ(name);
             return del;
         }
         catch (NullPointerException nPE) {
             nPE.printStackTrace();
         }
         return del;
-    }*/
+    }
 
 }

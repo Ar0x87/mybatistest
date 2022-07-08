@@ -72,15 +72,15 @@ public class HotelServiceImpl implements HotelService {
         return rslt;
    }
 
-   /*public final Integer delJ(String hName) throws NullPointerException{
-        Integer rslt = getIdByName(hName);
+   public final Integer delJ(String name) throws NullPointerException{
+        Integer rslt = getIdByName(name);
         if (rslt == null) {
             throw new NullPointerException("There is no such Hotel");
         } else {
             hotelmapper.delter(rslt);
         }
         return rslt;
-   }*/
+   }
 
     //Auxiliary Methods
 
