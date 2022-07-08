@@ -60,24 +60,47 @@ public class HotelServiceImpl implements HotelService {
             rslt = valueOf(reqLin.getId());
         }
         return rslt;
-    }
+   }
+
+   public final Integer delJ(Integer id) throws NullPointerException{
+        Integer rslt = checkIdExistance(id);
+        if (rslt == null) {
+            throw new NullPointerException("There is no such ID");
+        } else {
+            hotelmapper.delter(rslt);
+        }
+        return rslt;
+   }
+
+   /*public final Integer delJ(String hName) throws NullPointerException{
+        Integer rslt = getIdByName(hName);
+        if (rslt == null) {
+            throw new NullPointerException("There is no such Hotel");
+        } else {
+            hotelmapper.delter(rslt);
+        }
+        return rslt;
+   }*/
 
     //Auxiliary Methods
 
-    public final Integer getIdByName(String name) {
-        return hotelmapper.getIdByName(name);
-    }
+   public final Integer getIdByName(String name) {
+       return hotelmapper.getIdByName(name);
+   }
 
-    public final Integer checkIdExistance(Integer cie) {
-        return hotelmapper.checkIdExistance(cie);
-    }
+   public final Integer checkIdExistance(Integer cie) {
+       return hotelmapper.checkIdExistance(cie);
+   }
 
     //SQL Alternators
 
-    public final void poster(RequestStructure reqBod) {
-    }
+   public final void poster(RequestStructure reqBod) {
+   }
 
-    public final void puter(RequestStructureFullLine reqBod) {
-    }
+   public final void puter(RequestStructureFullLine reqBod) {
+   }
+
+   public final void delter(Integer x){
+   }
 
 }

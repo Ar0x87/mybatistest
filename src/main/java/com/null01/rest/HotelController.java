@@ -7,8 +7,6 @@ import com.null01.models.RequestStructureFullLine;
 import com.null01.services.HotelService;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -49,8 +47,8 @@ public class HotelController {
         try {
             post = hotelService.postJ(reqBod);
             return post;
-        } catch (AlreadyExistExeption e) {
-            e.printStackTrace();
+        } catch (AlreadyExistExeption aEE) {
+            aEE.printStackTrace();
         }
         return post;
     }
@@ -62,10 +60,38 @@ public class HotelController {
             put = hotelService.putJ(reqLin);
             return put;
         }
-        catch (NullPointerException a) {
-            a.printStackTrace();
+        catch (NullPointerException nPE) {
+            nPE.printStackTrace();
         }
         return put;
     }
+
+    @DeleteMapping
+    @RequestMapping("/delJ")
+    public Integer delJ(@RequestParam(value = "id")Integer id) {
+        Integer del = null;
+        try {
+            del = hotelService.delJ(id);
+            return del;
+        }
+        catch (NullPointerException nPE) {
+            nPE.printStackTrace();
+        }
+        return del;
+    }
+/*
+    @DeleteMapping
+    @RequestMapping("/delJ")
+    public Integer delJ(@RequestParam(value = "hName")String hName) {
+        Integer del = null;
+        try {
+            del = hotelService.delJ(hName);
+            return del;
+        }
+        catch (NullPointerException nPE) {
+            nPE.printStackTrace();
+        }
+        return del;
+    }*/
 
 }

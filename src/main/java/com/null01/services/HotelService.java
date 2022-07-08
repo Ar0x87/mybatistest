@@ -32,4 +32,10 @@ public interface HotelService {
     Integer checkIdExistance(Integer cie);
 
     Integer putJ(RequestStructureFullLine reqLin);
+
+    void delter(Integer x);
+
+    Integer delJ(Integer id);
+
+    //Integer delJ(String hName);
 }

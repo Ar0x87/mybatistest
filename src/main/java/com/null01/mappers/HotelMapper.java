@@ -38,5 +38,10 @@ public interface HotelMapper {
 
     void puter(Map<String, String> jSS);
 
+    void delter(Integer x);
+
+    Integer delJ(Integer id);
+
+    //Integer delJ(String hName);
 
 }
