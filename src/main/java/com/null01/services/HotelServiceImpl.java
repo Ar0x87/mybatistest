@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.null01.models.RequestStructure;
 import com.null01.models.RequestStructureFullLine;
+import com.null01.models.RequestStructurePartial;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class HotelServiceImpl implements HotelService {
 
     //Main Logic of "additionalMethodLogic" branch
 
-    public final Integer postJ(RequestStructure reqBod) throws AlreadyExistExeption  {
+    public final Integer postJ(RequestStructure reqBod) throws AlreadyExistExeption {
         Integer rslt = getIdByName(reqBod.getHotelname());
         if (rslt != null){
             throw new AlreadyExistExeption("Already exist");
@@ -51,7 +52,7 @@ public class HotelServiceImpl implements HotelService {
         return rslt;
     }
 
-   public final Integer putJ(RequestStructureFullLine reqLin) throws NullPointerException{
+   public final Integer putJ(RequestStructureFullLine reqLin) throws NullPointerException {
         Integer rslt = checkIdExistance(valueOf(reqLin.getId()));
         if (rslt == null) {
             throw new NullPointerException("There is no such ID");
@@ -62,7 +63,7 @@ public class HotelServiceImpl implements HotelService {
         return rslt;
    }
 
-   public final Integer delJ(Integer id) throws NullPointerException{
+   public final Integer delJ(Integer id) throws NullPointerException {
         Integer rslt = checkIdExistance(id);
         if (rslt == null) {
             throw new NullPointerException("There is no such ID");
@@ -72,12 +73,30 @@ public class HotelServiceImpl implements HotelService {
         return rslt;
    }
 
-   public final Integer delJ(String name) throws NullPointerException{
+   public final Integer delJ(String name) throws NullPointerException {
         Integer rslt = getIdByName(name);
         if (rslt == null) {
             throw new NullPointerException("There is no such Hotel");
         } else {
             hotelmapper.delter(rslt);
+        }
+        return rslt;
+   }
+
+   public final Integer patJ(RequestStructureFullLine reqLin) throws NullPointerException {
+        Integer rslt = checkIdExistance(valueOf(reqLin.getId()));
+        if (rslt == null) {
+            throw new NullPointerException("There is no such entry");
+        } else {
+            if (reqLin.getHotelname() == null || reqLin.getHotelname().equals("")) {
+                hotelmapper.alterAddress(Map.of("id", reqLin.getId(), "address", reqLin.getAddress()));
+            }
+            if (reqLin.getAddress() == null || reqLin.getAddress().equals("")) {
+                hotelmapper.alterHotel(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname()));
+            }
+            if (reqLin.getHotelname() != null && !reqLin.getHotelname().equals("") && reqLin.getAddress() != null && !reqLin.getAddress().equals("")) {
+                hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", reqLin.getAddress()));
+            }
         }
         return rslt;
    }
@@ -100,7 +119,13 @@ public class HotelServiceImpl implements HotelService {
    public final void puter(RequestStructureFullLine reqBod) {
    }
 
-   public final void delter(Integer x){
+   public final void delter(Integer x) {
+   }
+
+   public final void alterHotel(RequestStructurePartial reqPar) {
+   }
+
+   public final void alterAddress(RequestStructurePartial reqPar) {
    }
 
 }

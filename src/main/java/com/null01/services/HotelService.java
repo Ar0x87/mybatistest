@@ -4,6 +4,7 @@ import com.null01.Exeptions.AlreadyExistExeption;
 import com.null01.models.Hotel;
 import com.null01.models.RequestStructure;
 import com.null01.models.RequestStructureFullLine;
+import com.null01.models.RequestStructurePartial;
 
 import java.util.ArrayList;
 
@@ -38,4 +39,10 @@ public interface HotelService {
     Integer delJ(Integer id);
 
     Integer delJ(String name);
+
+    void alterHotel(RequestStructurePartial reqPar);
+
+    void alterAddress(RequestStructurePartial reqPar);
+
+    Integer patJ(RequestStructureFullLine reqLin);
 }

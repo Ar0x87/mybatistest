@@ -44,4 +44,8 @@ public interface HotelMapper {
 
     Integer delJ(String name);
 
+    void alterHotel(Map<String, String> jSS);
+
+    void alterAddress(Map<String, String> jSS);
+
 }

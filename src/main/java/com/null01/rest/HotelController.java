@@ -94,4 +94,17 @@ public class HotelController {
         return del;
     }
 
+    @PatchMapping(value = "/patJ", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Integer patJ(@RequestBody RequestStructureFullLine reqLin) {
+        Integer pat = null;
+        try {
+            pat = hotelService.patJ(reqLin);
+            return pat;
+        }
+        catch (NullPointerException nPE) {
+            nPE.printStackTrace();
+        }
+        return pat;
+    }
+
 }
