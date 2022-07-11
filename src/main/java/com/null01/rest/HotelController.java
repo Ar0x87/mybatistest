@@ -49,4 +49,16 @@ public class HotelController {
         return hotelService.putJ(reqLin);
     }
 
+    @DeleteMapping
+    @RequestMapping(value = "/delJ", params = {"id"})
+    public Integer delJ(@RequestParam(value = "id")Integer id) {
+        return hotelService.delJ(id);
+    }
+
+    @DeleteMapping
+    @RequestMapping(value = "/delJ", params = {"name"})
+    public Integer delJ(@RequestParam(value = "name")String name) {
+        return hotelService.delJ(name);
+    }
+
 }

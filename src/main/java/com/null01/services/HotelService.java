@@ -24,4 +24,8 @@ public interface HotelService {
 
     Integer putJ(RequestStructureFullLine reqLin);
 
+    Integer delJ(Integer id);
+
+    Integer delJ(String name);
+
 }

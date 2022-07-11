@@ -29,4 +29,9 @@ public interface HotelMapper {
     Integer postJ(Map<String, String> jSS);
 
     Integer putJ(Map<String, String> jSS);
+
+    Integer delJ(Integer id);
+
+    Integer delJ(String name);
+
 }
