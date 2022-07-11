@@ -50,8 +50,8 @@
         SELECT putJ(CAST(#{id} AS INTEGER), #{hotelname}, #{address});
     </select>
 
-    <select id="delJ" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-        CREATE OR REPLACE FUNCTION delJ(integer) RETURNS INTEGER AS $$
+    <select id="delJi" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        CREATE OR REPLACE FUNCTION delById(integer) RETURNS INTEGER AS $$
             BEGIN
                 IF ((SELECT id FROM hotel WHERE id = $1) IS NOT NULL)
                 THEN
@@ -63,11 +63,11 @@
             END;
         $$ LANGUAGE plpgsql;
 
-        SELECT delJ(#{id});
+        SELECT delById(#{id});
     </select>
 
-    <select id="delJ" resultType="java.lang.Integer" parameterType="java.lang.String">
-        CREATE OR REPLACE FUNCTION delJ(varchar(30)) RETURNS INTEGER AS $$
+    <select id="delJs" resultType="java.lang.Integer" parameterType="java.lang.String">
+        CREATE OR REPLACE FUNCTION delByName(varchar(30)) RETURNS INTEGER AS $$
             DECLARE
                 aim int ;
             BEGIN
@@ -81,6 +81,8 @@
             RETURN aim;
             END;
         $$ LANGUAGE plpgsql;
+
+        SELECT delByName(#{name});
     </select>
 
 </mapper>

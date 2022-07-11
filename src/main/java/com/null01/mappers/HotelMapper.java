@@ -30,8 +30,8 @@ public interface HotelMapper {
 
     Integer putJ(Map<String, String> jSS);
 
-    Integer delJ(Integer id);
+    Integer delJi(Integer id);
 
-    Integer delJ(String name);
+    Integer delJs(String name);
 
 }

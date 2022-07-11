@@ -44,10 +44,10 @@ public class HotelServiceImpl implements HotelService {
     }
 
     public final Integer delJ(Integer id) {
-        return hotelmapper.delJ(id);
+        return hotelmapper.delJi(id);
     }
 
     public final Integer delJ(String name) {
-        return hotelmapper.delJ(name);
+        return hotelmapper.delJs(name);
     }
 }
