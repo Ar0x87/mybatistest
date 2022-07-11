@@ -32,15 +32,15 @@ public class HotelServiceImpl implements HotelService {
     }
 
     public final ArrayList<Hotel> getByName(String name) {
-        return hotelmapper.getByName('%' + name + '%');
+        return hotelmapper.getByName(name);
     }
 
     public final Integer postJ(@NonNull RequestStructure reqBod) {
-        return hotelmapper.postJ(Map.of("hotelname", reqBod.hotelname, "address", reqBod.address));
+        return hotelmapper.postJ(Map.of("hotelname", reqBod.getHotelname(), "address", reqBod.getAddress()));
     }
 
     public final Integer putJ(@NonNull RequestStructureFullLine reqLin) {
-        return hotelmapper.putJ(Map.of("id", reqLin.id, "hotelname", reqLin.hotelname, "address", reqLin.address));
+        return hotelmapper.putJ(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", reqLin.getAddress()));
     }
 
     public final Integer delJ(Integer id) {
@@ -51,7 +51,7 @@ public class HotelServiceImpl implements HotelService {
         return hotelmapper.delJs(name);
     }
 
-    public final Integer patJ(RequestStructureFullLine reqLin) {
-        return hotelmapper.patJ(Map.of("id", reqLin.id, "hotelname", reqLin.hotelname, "address", reqLin.address));
+    public final Integer patJ(@NonNull RequestStructureFullLine reqLin) {
+        return hotelmapper.patJ(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", reqLin.getAddress()));
     }
 }
