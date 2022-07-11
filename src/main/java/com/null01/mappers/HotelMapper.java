@@ -34,4 +34,6 @@ public interface HotelMapper {
 
     Integer delJs(String name);
 
+    Integer patJ(Map<String, String> jSS);
+
 }

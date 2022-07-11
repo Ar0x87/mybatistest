@@ -50,4 +50,8 @@ public class HotelServiceImpl implements HotelService {
     public final Integer delJ(String name) {
         return hotelmapper.delJs(name);
     }
+
+    public final Integer patJ(RequestStructureFullLine reqLin) {
+        return hotelmapper.patJ(Map.of("id", reqLin.id, "hotelname", reqLin.hotelname, "address", reqLin.address));
+    }
 }

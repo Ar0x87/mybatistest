@@ -61,4 +61,9 @@ public class HotelController {
         return hotelService.delJ(name);
     }
 
+    @PatchMapping(value = "/patJ", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Integer patJ(@RequestBody RequestStructureFullLine reqLin) {
+        return hotelService.patJ(reqLin);
+    }
+
 }

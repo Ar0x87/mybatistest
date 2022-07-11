@@ -28,4 +28,6 @@ public interface HotelService {
 
     Integer delJ(String name);
 
+    Integer patJ(RequestStructureFullLine reqLin);
+
 }

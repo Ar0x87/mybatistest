@@ -85,4 +85,39 @@
         SELECT delByName(#{name});
     </select>
 
+    <select id="patJ" resultType="java.lang.Integer" parameterType="java.util.Map">
+        CREATE OR REPLACE FUNCTION alterHotel(integer, varchar(30)) RETURNS VOID AS $$
+            BEGIN
+                IF ($2 IS NOT NULL)
+                THEN
+                    UPDATE hotel SET hotelname = $2 WHERE id = $1;
+                END IF;
+            END;
+        $$ LANGUAGE plpgsql;
+
+        CREATE OR REPLACE FUNCTION alterAddress(integer, varchar(20)) RETURNS VOID AS $$
+            BEGIN
+                IF ($2 IS NOT NULL)
+                THEN
+                    UPDATE hotel SET address = $2 WHERE id = $1;
+                END IF;
+            END;
+        $$ LANGUAGE plpgsql;
+
+        CREATE OR REPLACE FUNCTION patJ(integer, varchar(30), varchar(20)) RETURNS INTEGER AS $$
+            BEGIN
+                IF ((SELECT id FROM hotel WHERE id = $1) IS NOT NULL)
+                THEN
+                    SELECT alterHotel($1, $2);
+                    SELECT alterAddress($1, $3);
+                ELSE
+                    SELECT pg_cancel_backend(1);
+                END IF;
+            RETURN ($1);
+            END;
+        $$ LANGUAGE plpgsql;
+
+        SELECT patJ(CAST(#{id} AS INTEGER), #{hotelname}, #{address});
+    </select>
+
 </mapper>
