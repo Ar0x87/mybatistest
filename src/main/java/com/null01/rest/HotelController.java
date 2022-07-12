@@ -2,6 +2,7 @@ package com.null01.rest;
 
 import com.null01.Exeptions.AlreadyExistExeption;
 import com.null01.Exeptions.EmptyBodyException;
+import com.null01.Exeptions.MisstargetException;
 import com.null01.models.Hotel;
 import com.null01.models.RequestStructure;
 import com.null01.models.RequestStructureFullLine;
@@ -48,8 +49,8 @@ public class HotelController {
         try {
             post = hotelService.postJ(reqBod);
             return post;
-        } catch (AlreadyExistExeption aEE) {
-            aEE.printStackTrace();
+        } catch (AlreadyExistExeption aee) {
+            aee.printStackTrace();
         }
         return post;
     }
@@ -61,8 +62,8 @@ public class HotelController {
             put = hotelService.putJ(reqLin);
             return put;
         }
-        catch (NullPointerException nPE) {
-            nPE.printStackTrace();
+        catch (NullPointerException npe) {
+            npe.printStackTrace();
         }
         return put;
     }
@@ -75,8 +76,8 @@ public class HotelController {
             del = hotelService.delJ(id);
             return del;
         }
-        catch (NullPointerException nPE) {
-            nPE.printStackTrace();
+        catch (NullPointerException npe) {
+            npe.printStackTrace();
         }
         return del;
     }
@@ -89,8 +90,8 @@ public class HotelController {
             del = hotelService.delJ(name);
             return del;
         }
-        catch (NullPointerException nPE) {
-            nPE.printStackTrace();
+        catch (NullPointerException npe) {
+            npe.printStackTrace();
         }
         return del;
     }
@@ -102,8 +103,11 @@ public class HotelController {
             pat = hotelService.patJ(reqLin);
             return pat;
         }
-        catch (NullPointerException | EmptyBodyException nPE) {
-            nPE.printStackTrace();
+        catch (EmptyBodyException ebe) {
+            ebe.printStackTrace();
+        }
+        catch (MisstargetException | NullPointerException mtnpe) {
+            mtnpe.getCause();
         }
         return pat;
     }

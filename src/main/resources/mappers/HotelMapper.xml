@@ -45,11 +45,11 @@
         DELETE FROM hotel WHERE id = #{x}
     </select>
 
-    <select id="alterHotel" resultType="java.lang.Integer" parameterType="java.util.Map">
-        UPDATE hotel SET hotelname = #{hotelname} WHERE id = CAST(#{id} AS INTEGER );
+    <select id="getHotelnameById" resultType="java.lang.String" parameterType="java.lang.Integer">
+        SELECT hotelname FROM hotel WHERE id = #{id};
     </select>
 
-    <select id="alterAddress" resultType="java.lang.Integer" parameterType="java.util.Map">
-        UPDATE hotel SET address = #{address} WHERE id = CAST(#{id} AS INTEGER );
+    <select id="getAddressById" resultType="java.lang.String" parameterType="java.lang.Integer">
+        SELECT address FROM hotel WHERE id = #{id};
     </select>
 </mapper>

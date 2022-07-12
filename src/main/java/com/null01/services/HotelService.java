@@ -2,10 +2,10 @@ package com.null01.services;
 
 import com.null01.Exeptions.AlreadyExistExeption;
 import com.null01.Exeptions.EmptyBodyException;
+import com.null01.Exeptions.MisstargetException;
 import com.null01.models.Hotel;
 import com.null01.models.RequestStructure;
 import com.null01.models.RequestStructureFullLine;
-import com.null01.models.RequestStructurePartial;
 
 import java.util.ArrayList;
 
@@ -41,10 +41,10 @@ public interface HotelService {
 
     Integer delJ(String name);
 
-    void alterHotel(RequestStructureFullLine reqLin);
+    Integer patJ(RequestStructureFullLine reqLin) throws EmptyBodyException, MisstargetException;
 
-    void alterAddress(RequestStructureFullLine reqLin);
+    String getHotelnameById(Integer id);
 
-    Integer patJ(RequestStructureFullLine reqLin) throws EmptyBodyException;
+    String getAddressById(Integer id);
 
 }
