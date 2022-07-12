@@ -46,10 +46,10 @@
     </select>
 
     <select id="alterHotel" resultType="java.lang.Integer" parameterType="java.util.Map">
-        UPDATE hotel SET hotelname = #{var} WHERE id = CAST(#{id} AS INTEGER );
+        UPDATE hotel SET hotelname = #{hotelname} WHERE id = CAST(#{id} AS INTEGER );
     </select>
 
     <select id="alterAddress" resultType="java.lang.Integer" parameterType="java.util.Map">
-        UPDATE hotel SET address = #{var} WHERE id = CAST(#{id} AS INTEGER );
+        UPDATE hotel SET address = #{address} WHERE id = CAST(#{id} AS INTEGER );
     </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.null01.services;
 
 import com.null01.Exeptions.AlreadyExistExeption;
+import com.null01.Exeptions.EmptyBodyException;
 import com.null01.models.Hotel;
 import com.null01.models.RequestStructure;
 import com.null01.models.RequestStructureFullLine;
@@ -40,9 +41,10 @@ public interface HotelService {
 
     Integer delJ(String name);
 
-    void alterHotel(RequestStructurePartial reqPar);
+    void alterHotel(RequestStructureFullLine reqLin);
 
-    void alterAddress(RequestStructurePartial reqPar);
+    void alterAddress(RequestStructureFullLine reqLin);
 
-    Integer patJ(RequestStructureFullLine reqLin);
+    Integer patJ(RequestStructureFullLine reqLin) throws EmptyBodyException;
+
 }

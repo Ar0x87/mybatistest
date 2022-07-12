@@ -1,6 +1,7 @@
 package com.null01.rest;
 
 import com.null01.Exeptions.AlreadyExistExeption;
+import com.null01.Exeptions.EmptyBodyException;
 import com.null01.models.Hotel;
 import com.null01.models.RequestStructure;
 import com.null01.models.RequestStructureFullLine;
@@ -101,7 +102,7 @@ public class HotelController {
             pat = hotelService.patJ(reqLin);
             return pat;
         }
-        catch (NullPointerException nPE) {
+        catch (NullPointerException | EmptyBodyException nPE) {
             nPE.printStackTrace();
         }
         return pat;

@@ -1,6 +1,7 @@
 package com.null01.services;
 
 import com.null01.Exeptions.AlreadyExistExeption;
+import com.null01.Exeptions.EmptyBodyException;
 import com.null01.mappers.HotelMapper;
 import com.null01.models.Hotel;
 
@@ -83,19 +84,20 @@ public class HotelServiceImpl implements HotelService {
         return rslt;
    }
 
-   public final Integer patJ(RequestStructureFullLine reqLin) throws NullPointerException {
+   public final Integer patJ(RequestStructureFullLine reqLin) throws NullPointerException, EmptyBodyException{
         Integer rslt = checkIdExistance(valueOf(reqLin.getId()));
+        Map<String, String> box = Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", reqLin.getAddress());
         if (rslt == null) {
             throw new NullPointerException("There is no such entry");
         } else {
-            if (reqLin.getHotelname() == null || reqLin.getHotelname().equals("")) {
+            if (box.get("hotelname").equals("") || box.get("hotelname") == null) {
                 hotelmapper.alterAddress(Map.of("id", reqLin.getId(), "address", reqLin.getAddress()));
             }
-            if (reqLin.getAddress() == null || reqLin.getAddress().equals("")) {
+            if (box.get("address").equals("") || box.get("address") == null) {
                 hotelmapper.alterHotel(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname()));
             }
-            if (reqLin.getHotelname() != null && !reqLin.getHotelname().equals("") && reqLin.getAddress() != null && !reqLin.getAddress().equals("")) {
-                hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", reqLin.getAddress()));
+            if ((box.get("hotelname").equals("") || box.get("hotelname") == null) && (box.get("address").equals("")) || box.get("address") == null) {
+                throw new EmptyBodyException("Empty request");
             }
         }
         return rslt;
@@ -122,10 +124,10 @@ public class HotelServiceImpl implements HotelService {
    public final void delter(Integer x) {
    }
 
-   public final void alterHotel(RequestStructurePartial reqPar) {
+   public final void alterHotel(RequestStructureFullLine reqLin) {
    }
 
-   public final void alterAddress(RequestStructurePartial reqPar) {
+   public final void alterAddress(RequestStructureFullLine reqLin) {
    }
 
 }
