@@ -85,25 +85,23 @@ public class HotelServiceImpl implements HotelService {
         return rslt;
    }
 
-   public final Integer patJ(RequestStructureFullLine reqLin) throws MisstargetException, EmptyBodyException, NullPointerException{
+   public final Integer patJ(RequestStructureFullLine reqLin) throws MisstargetException, EmptyBodyException, NullPointerException {
         Integer rslt = checkIdExistance(valueOf(reqLin.getId()));
-        HashMap<String, String> box = new HashMap<>();
-        box.put("id", reqLin.getId());
-        box.put("hotelname", reqLin.getHotelname());
-        box.put("address", reqLin.getAddress());
         if (rslt == null) {
             throw new MisstargetException("There is no such entry");
         } else {
-            if ((box.get("hotelname") == null || box.get("hotelname").equals("") || reqLin.getHotelname() == null) && (box.get("address") == null || box.get("address").equals("") || reqLin.getAddress() == null)) {
+            if (reqLin.getHotelname() == null && reqLin.getAddress() == null) {
                 throw new EmptyBodyException("Empty request");
-            }
-            else if (box.get("hotelname") == null || box.get("hotelname").equals("") || reqLin.getHotelname() == null) {
-                hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", getHotelnameById(valueOf(box.get("id"))), "address", reqLin.getAddress()));
-            }
-            else if (box.get("address") == null || box.get("address").equals("") || reqLin.getAddress() == null) {
-                hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", getAddressById(valueOf(box.get("id")))));
             } else {
-                hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", reqLin.getAddress()));
+                if (reqLin.getHotelname() == null) {
+                    hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", getHotelnameById(valueOf(reqLin.getId())), "address", reqLin.getAddress()));
+                }
+                if (reqLin.getAddress() == null) {
+                    hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", getAddressById(valueOf(reqLin.getId()))));
+                }
+                if (reqLin.getHotelname() != null && reqLin.getAddress() != null) {
+                    hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", reqLin.getAddress()));
+                }
             }
         }
         return rslt;
