@@ -112,7 +112,7 @@ public class HotelServiceImpl implements HotelService {
     //Auxiliary Methods
 
    public final ArrayList<Integer> getIdByName(String name) {
-       return caster(hotelmapper.getByName(name));
+       return caster(hotelmapper.getByNameForDel(name));
    }
 
    public final Integer checkIdExistance(Integer cie) {
@@ -127,7 +127,12 @@ public class HotelServiceImpl implements HotelService {
         return hotelmapper.getAddressById(id);
    }
 
-   public final ArrayList<Integer> caster(ArrayList<Hotel> cst) {
+    public final ArrayList<Hotel> getByNameForDel(String name) {
+        return hotelmapper.getByNameForDel(name);
+    }
+
+
+    public final ArrayList<Integer> caster(ArrayList<Hotel> cst) {
         ArrayList<Integer> rslt = new ArrayList<>();
         for (Hotel x: cst) {
             rslt.add(x.getId());

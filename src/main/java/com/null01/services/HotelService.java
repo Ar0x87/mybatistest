@@ -24,6 +24,8 @@ public interface HotelService {
 
     ArrayList<Hotel> getByName(String name);
 
+    ArrayList<Hotel> getByNameForDel(String name);
+
     Integer postJ(RequestStructure reqBod) throws AlreadyExistExeption;
 
     void poster(RequestStructure reqBod);
