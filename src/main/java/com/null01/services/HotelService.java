@@ -3,9 +3,10 @@ package com.null01.services;
 import com.null01.Exeptions.AlreadyExistExeption;
 import com.null01.Exeptions.EmptyBodyException;
 import com.null01.Exeptions.MisstargetException;
+import com.null01.Exeptions.UnexistanceExeption;
 import com.null01.models.Hotel;
-import com.null01.models.RequestStructure;
-import com.null01.models.RequestStructureFullLine;
+import com.null01.Requests.RequestStructure;
+import com.null01.Requests.RequestStructureFullLine;
 
 import java.util.ArrayList;
 
@@ -25,21 +26,19 @@ public interface HotelService {
 
     Integer postJ(RequestStructure reqBod) throws AlreadyExistExeption;
 
-    Integer getIdByName(String name) throws AlreadyExistExeption;
-
     void poster(RequestStructure reqBod);
 
     void puter(RequestStructureFullLine reqLin);
 
     Integer checkIdExistance(Integer cie);
 
-    Integer putJ(RequestStructureFullLine reqLin);
+    Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceExeption;
 
     void delter(Integer x);
 
-    Integer delJ(Integer id);
+    Integer delJ(Integer id) throws UnexistanceExeption;
 
-    Integer delJ(String name);
+    ArrayList<Integer> delJ(String name) throws UnexistanceExeption;
 
     Integer patJ(RequestStructureFullLine reqLin) throws EmptyBodyException, MisstargetException;
 

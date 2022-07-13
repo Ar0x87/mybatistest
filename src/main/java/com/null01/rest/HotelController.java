@@ -3,9 +3,10 @@ package com.null01.rest;
 import com.null01.Exeptions.AlreadyExistExeption;
 import com.null01.Exeptions.EmptyBodyException;
 import com.null01.Exeptions.MisstargetException;
+import com.null01.Exeptions.UnexistanceExeption;
 import com.null01.models.Hotel;
-import com.null01.models.RequestStructure;
-import com.null01.models.RequestStructureFullLine;
+import com.null01.Requests.RequestStructure;
+import com.null01.Requests.RequestStructureFullLine;
 import com.null01.services.HotelService;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
@@ -62,8 +63,8 @@ public class HotelController {
             put = hotelService.putJ(reqLin);
             return put;
         }
-        catch (NullPointerException npe) {
-            npe.printStackTrace();
+        catch (UnexistanceExeption uee) {
+            uee.printStackTrace();
         }
         return put;
     }
@@ -76,22 +77,22 @@ public class HotelController {
             del = hotelService.delJ(id);
             return del;
         }
-        catch (NullPointerException npe) {
-            npe.printStackTrace();
+        catch (UnexistanceExeption uee) {
+            uee.printStackTrace();
         }
         return del;
     }
 
     @DeleteMapping
     @RequestMapping(value = "/delJ", params = {"name"})
-    public Integer delJ(@RequestParam(value = "name")String name) {
-        Integer del = null;
+    public ArrayList<Integer> delJ(@RequestParam(value = "name")String name) {
+        ArrayList<Integer> del = new ArrayList<>();
         try {
             del = hotelService.delJ(name);
             return del;
         }
-        catch (NullPointerException npe) {
-            npe.printStackTrace();
+        catch (UnexistanceExeption uee) {
+            uee.printStackTrace();
         }
         return del;
     }

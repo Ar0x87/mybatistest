@@ -30,8 +30,6 @@ public interface HotelMapper {
 
     Integer putJ(Map<String, String> jSS);
 
-    Integer getIdByName(String name);
-
     Integer checkIdExistance(Integer cie);
 
     void poster(Map<String, String> jSS);
@@ -42,7 +40,7 @@ public interface HotelMapper {
 
     Integer delJ(Integer id);
 
-    Integer delJ(String name);
+    ArrayList<Integer> delJ(String name);
 
     String getHotelnameById(Integer id);
 

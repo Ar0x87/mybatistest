@@ -23,10 +23,6 @@
         INSERT INTO hotel(id, hotelname, address) VALUES (nextval('hotel_id_seq'), #{hotelname} , #{address} );
     </select>
 
-    <select id="getIdByName" resultType="java.lang.Integer" parameterType="java.lang.String">
-        SELECT id FROM hotel WHERE hotelname = #{name};
-    </select>
-
     <select id="postJ" resultType="java.lang.Integer" parameterType="java.util.Map">
     </select>
 
@@ -52,4 +48,5 @@
     <select id="getAddressById" resultType="java.lang.String" parameterType="java.lang.Integer">
         SELECT address FROM hotel WHERE id = #{id};
     </select>
+
 </mapper>
