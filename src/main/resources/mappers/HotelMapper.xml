@@ -13,7 +13,7 @@
         SELECT id, hotelname, address FROM hotel
     </select>
 
-    <select id="getByNameForDel" resultMap="HotelResultMap" parameterType="java.lang.String">
+    <select id="getHotelMapByName" resultMap="HotelResultMap" parameterType="java.lang.String">
         SELECT id, hotelname, address FROM hotel
         WHERE hotelname = #{name};
     </select>

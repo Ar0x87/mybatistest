@@ -34,7 +34,7 @@ public class HotelController {
 
     @Autowired
     private final HotelService hotelService;
-    private static final Logger Logger = LoggerFactory.getLogger(HotelController.class);
+    //private static final Logger Logger = LoggerFactory.getLogger(HotelController.class);
 
     @GetMapping
     @RequestMapping("/getAll")
@@ -49,82 +49,77 @@ public class HotelController {
     }
 
     @PostMapping(value = "/postJ", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Integer postJ(@RequestBody RequestStructure reqBod) {
-        Integer post = null;
-        try {
-            post = hotelService.postJ(reqBod);
+    public Integer postJ(@RequestBody RequestStructure reqBod) throws AlreadyExistException {
+        //Integer post = null;
+        //try {
+            Integer post = hotelService.postJ(reqBod);
             return post;
-        } catch (AlreadyExistException aee) {
+        /*} catch (AlreadyExistException aee) {
             aee.printStackTrace();
         }
-        return post;
+        return post;*/
     }
 
     @PutMapping(value = "/putJ", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Integer putJ(@RequestBody RequestStructureFullLine reqLin) {
+    public Integer putJ(@RequestBody RequestStructureFullLine reqLin) throws UnexistanceException {
         Integer put = null;
-        try {
+        //try {
             put = hotelService.putJ(reqLin);
             return put;
-        }
+        /*}
         catch (UnexistanceException uee) {
             uee.printStackTrace();
         }
-        return put;
+        return put;*/
     }
 
     @DeleteMapping
     @RequestMapping(value = "/delJ", params = {"id"})
-    public Integer delJ(@RequestParam(value = "id")Integer id) {
+    public Integer delJ(@RequestParam(value = "id")Integer id) throws UnexistanceException {
         Integer del = null;
-        try {
+        //try {
             del = hotelService.delJ(id);
             return del;
-        }
+        /*}
         catch (UnexistanceException uee) {
             uee.printStackTrace();
         }
-        return del;
+        return del;*/
     }
 
     @DeleteMapping
     @RequestMapping(value = "/delJ", params = {"name"})
-    @ResponseBody
     public ArrayList<Integer> delJ(@RequestParam(value = "name")String name) throws UnexistanceException {
         ArrayList<Integer> del = new ArrayList<>();
-        del = hotelService.delJ(name);
-        if (del.isEmpty()) {
-            throw new UnexistanceException("uee");
-        }
-        /*try {
+        //try {
             del = hotelService.delJ(name);
             return del;
-        }
+        /*}
         catch (UnexistanceException uee) {
              handleUnexistanceException();
-        }*/
-        return del;
+        }
+        return del;*/
     }
 
     @PatchMapping(value = "/patJ", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Integer patJ(@RequestBody RequestStructureFullLine reqLin) {
+    public Integer patJ(@RequestBody RequestStructureFullLine reqLin) throws EmptyBodyException, MisstargetException {
         Integer pat = null;
-        try {
+        //try {
             pat = hotelService.patJ(reqLin);
             return pat;
-        }
+        /*}
         catch (EmptyBodyException ebe) {
             ebe.printStackTrace();
         }
         catch (MisstargetException | NullPointerException mtnpe) {
             mtnpe.getCause();
         }
-        return pat;
+        return pat;*/
     }
 
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Entry do not exist!")
+    /*@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Entry do not exist!")
     @ExceptionHandler(UnexistanceException.class)
     public void handleUnexistanceException() {
         Logger.error("UnexistanceException handler executed.");
-    }
+    }*/
 }

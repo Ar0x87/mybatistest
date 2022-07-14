@@ -26,7 +26,7 @@ public interface HotelMapper {
 
     ArrayList<Hotel> getByName(String name);
 
-    ArrayList<Hotel> getByNameForDel(String name);
+    ArrayList<Hotel> getHotelMapByName(String name);
 
     Integer postJ(Map<String, String> jSS);
 

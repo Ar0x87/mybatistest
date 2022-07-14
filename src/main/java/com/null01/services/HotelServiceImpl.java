@@ -44,14 +44,16 @@ public class HotelServiceImpl implements HotelService {
     //Main Logic of "additionalMethodLogic" branch
 
     public final Integer postJ(RequestStructure reqBod) throws AlreadyExistException {
-        ArrayList<Integer> rslt = getIdByName(reqBod.getHotelname());
-        if (!rslt.isEmpty()){
-            throw new AlreadyExistException("Already exist");
-        } else {
+        ArrayList<Integer> stp = getIdByName(reqBod.getHotelname());
+        Integer rslt;
+        if (stp.isEmpty()) {
             hotelmapper.poster(Map.of("hotelname", reqBod.getHotelname(), "address", reqBod.getAddress()));
-            rslt = getIdByName(reqBod.getHotelname());
+            stp = getIdByName(reqBod.getHotelname());
+            rslt = stp.get(0);
+        } else {
+            throw new AlreadyExistException("Already exist");
         }
-        return rslt.get(0);
+        return rslt;
     }
 
    public final Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException {
@@ -87,9 +89,9 @@ public class HotelServiceImpl implements HotelService {
         return rslt;
    }
 
-   public final Integer patJ(RequestStructureFullLine reqLin) throws MisstargetException, EmptyBodyException, NullPointerException {
-        Integer rslt = checkIdExistance(valueOf(reqLin.getId()));
-        if (rslt == null) {
+   public final Integer patJ(RequestStructureFullLine reqLin) throws MisstargetException, EmptyBodyException {
+        Integer rslt = checkIdExistance(Integer.parseInt(reqLin.getId()));
+        if (rslt == null || rslt == 0) {
             throw new MisstargetException("There is no such entry");
         } else {
             if (reqLin.getHotelname() == null && reqLin.getAddress() == null) {
@@ -112,7 +114,7 @@ public class HotelServiceImpl implements HotelService {
     //Auxiliary Methods
 
    public final ArrayList<Integer> getIdByName(String name) {
-       return caster(hotelmapper.getByNameForDel(name));
+       return caster(hotelmapper.getHotelMapByName(name));
    }
 
    public final Integer checkIdExistance(Integer cie) {
@@ -127,8 +129,8 @@ public class HotelServiceImpl implements HotelService {
         return hotelmapper.getAddressById(id);
    }
 
-    public final ArrayList<Hotel> getByNameForDel(String name) {
-        return hotelmapper.getByNameForDel(name);
+   public final ArrayList<Hotel> getHotelMapByName(String name) {
+        return hotelmapper.getHotelMapByName(name);
     }
 
 
