@@ -1,9 +1,9 @@
 package com.null01.services;
 
-import com.null01.Exeptions.AlreadyExistExeption;
-import com.null01.Exeptions.MisstargetException;
-import com.null01.Exeptions.EmptyBodyException;
-import com.null01.Exeptions.UnexistanceExeption;
+import com.null01.Exceptions.AlreadyExistException;
+import com.null01.Exceptions.MisstargetException;
+import com.null01.Exceptions.EmptyBodyException;
+import com.null01.Exceptions.UnexistanceException;
 import com.null01.mappers.HotelMapper;
 import com.null01.models.Hotel;
 
@@ -43,10 +43,10 @@ public class HotelServiceImpl implements HotelService {
 
     //Main Logic of "additionalMethodLogic" branch
 
-    public final Integer postJ(RequestStructure reqBod) throws AlreadyExistExeption {
+    public final Integer postJ(RequestStructure reqBod) throws AlreadyExistException {
         ArrayList<Integer> rslt = getIdByName(reqBod.getHotelname());
         if (!rslt.isEmpty()){
-            throw new AlreadyExistExeption("Already exist");
+            throw new AlreadyExistException("Already exist");
         } else {
             hotelmapper.poster(Map.of("hotelname", reqBod.getHotelname(), "address", reqBod.getAddress()));
             rslt = getIdByName(reqBod.getHotelname());
@@ -54,10 +54,10 @@ public class HotelServiceImpl implements HotelService {
         return rslt.get(0);
     }
 
-   public final Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceExeption {
+   public final Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException {
         Integer rslt = checkIdExistance(valueOf(reqLin.getId()));
         if (rslt == null) {
-            throw new UnexistanceExeption("There is no such ID");
+            throw new UnexistanceException("There is no such ID");
         } else {
             hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", reqLin.getAddress()));
             rslt = valueOf(reqLin.getId());
@@ -65,20 +65,20 @@ public class HotelServiceImpl implements HotelService {
         return rslt;
    }
 
-   public final Integer delJ(Integer id) throws UnexistanceExeption {
+   public final Integer delJ(Integer id) throws UnexistanceException {
         Integer rslt = checkIdExistance(id);
         if (rslt == null) {
-            throw new UnexistanceExeption("There is no such ID");
+            throw new UnexistanceException("There is no such ID");
         } else {
             hotelmapper.delter(rslt);
         }
         return rslt;
    }
 
-   public final ArrayList<Integer> delJ(String name) throws UnexistanceExeption {
+   public final ArrayList<Integer> delJ(String name) throws UnexistanceException {
         ArrayList<Integer> rslt = getIdByName(name);
         if (rslt.isEmpty()) {
-            throw new UnexistanceExeption("There is no such Hotel");
+            throw new UnexistanceException("There is no such Hotel");
         } else {
             for (Integer x: rslt ){
                 hotelmapper.delter(x);

@@ -1,16 +1,19 @@
 package com.null01.rest;
 
-import com.null01.Exeptions.AlreadyExistExeption;
-import com.null01.Exeptions.EmptyBodyException;
-import com.null01.Exeptions.MisstargetException;
-import com.null01.Exeptions.UnexistanceExeption;
+import com.null01.Exceptions.AlreadyExistException;
+import com.null01.Exceptions.EmptyBodyException;
+import com.null01.Exceptions.MisstargetException;
+import com.null01.Exceptions.UnexistanceException;
 import com.null01.models.Hotel;
 import com.null01.Requests.RequestStructure;
 import com.null01.Requests.RequestStructureFullLine;
 import com.null01.services.HotelService;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +34,7 @@ public class HotelController {
 
     @Autowired
     private final HotelService hotelService;
+    private static final Logger Logger = LoggerFactory.getLogger(HotelController.class);
 
     @GetMapping
     @RequestMapping("/getAll")
@@ -50,7 +54,7 @@ public class HotelController {
         try {
             post = hotelService.postJ(reqBod);
             return post;
-        } catch (AlreadyExistExeption aee) {
+        } catch (AlreadyExistException aee) {
             aee.printStackTrace();
         }
         return post;
@@ -63,7 +67,7 @@ public class HotelController {
             put = hotelService.putJ(reqLin);
             return put;
         }
-        catch (UnexistanceExeption uee) {
+        catch (UnexistanceException uee) {
             uee.printStackTrace();
         }
         return put;
@@ -77,7 +81,7 @@ public class HotelController {
             del = hotelService.delJ(id);
             return del;
         }
-        catch (UnexistanceExeption uee) {
+        catch (UnexistanceException uee) {
             uee.printStackTrace();
         }
         return del;
@@ -85,15 +89,20 @@ public class HotelController {
 
     @DeleteMapping
     @RequestMapping(value = "/delJ", params = {"name"})
-    public ArrayList<Integer> delJ(@RequestParam(value = "name")String name) {
+    @ResponseBody
+    public ArrayList<Integer> delJ(@RequestParam(value = "name")String name) throws UnexistanceException {
         ArrayList<Integer> del = new ArrayList<>();
-        try {
+        del = hotelService.delJ(name);
+        if (del.isEmpty()) {
+            throw new UnexistanceException("uee");
+        }
+        /*try {
             del = hotelService.delJ(name);
             return del;
         }
-        catch (UnexistanceExeption uee) {
-            uee.printStackTrace();
-        }
+        catch (UnexistanceException uee) {
+             handleUnexistanceException();
+        }*/
         return del;
     }
 
@@ -113,4 +122,9 @@ public class HotelController {
         return pat;
     }
 
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Entry do not exist!")
+    @ExceptionHandler(UnexistanceException.class)
+    public void handleUnexistanceException() {
+        Logger.error("UnexistanceException handler executed.");
+    }
 }

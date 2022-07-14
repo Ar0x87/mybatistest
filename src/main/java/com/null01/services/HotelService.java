@@ -1,9 +1,9 @@
 package com.null01.services;
 
-import com.null01.Exeptions.AlreadyExistExeption;
-import com.null01.Exeptions.EmptyBodyException;
-import com.null01.Exeptions.MisstargetException;
-import com.null01.Exeptions.UnexistanceExeption;
+import com.null01.Exceptions.AlreadyExistException;
+import com.null01.Exceptions.EmptyBodyException;
+import com.null01.Exceptions.MisstargetException;
+import com.null01.Exceptions.UnexistanceException;
 import com.null01.models.Hotel;
 import com.null01.Requests.RequestStructure;
 import com.null01.Requests.RequestStructureFullLine;
@@ -26,7 +26,7 @@ public interface HotelService {
 
     ArrayList<Hotel> getByNameForDel(String name);
 
-    Integer postJ(RequestStructure reqBod) throws AlreadyExistExeption;
+    Integer postJ(RequestStructure reqBod) throws AlreadyExistException;
 
     void poster(RequestStructure reqBod);
 
@@ -34,13 +34,13 @@ public interface HotelService {
 
     Integer checkIdExistance(Integer cie);
 
-    Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceExeption;
+    Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException;
 
     void delter(Integer x);
 
-    Integer delJ(Integer id) throws UnexistanceExeption;
+    Integer delJ(Integer id) throws UnexistanceException;
 
-    ArrayList<Integer> delJ(String name) throws UnexistanceExeption;
+    ArrayList<Integer> delJ(String name) throws UnexistanceException;
 
     Integer patJ(RequestStructureFullLine reqLin) throws EmptyBodyException, MisstargetException;
 
