@@ -1,12 +1,12 @@
 package com.null01.rest;
 
-import com.null01.Exceptions.AlreadyExistException;
-import com.null01.Exceptions.EmptyBodyException;
-import com.null01.Exceptions.MisstargetException;
-import com.null01.Exceptions.UnexistanceException;
+import com.null01.exceptions.AlreadyExistException;
+import com.null01.exceptions.EmptyBodyException;
+import com.null01.exceptions.MisstargetException;
+import com.null01.exceptions.UnexistanceException;
 import com.null01.models.Hotel;
-import com.null01.Requests.RequestStructure;
-import com.null01.Requests.RequestStructureFullLine;
+import com.null01.requests.RequestStructure;
+import com.null01.requests.RequestStructureFullLine;
 import com.null01.services.HotelService;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;

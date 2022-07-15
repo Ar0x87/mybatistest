@@ -1,4 +1,4 @@
-package com.null01.Exceptions;
+package com.null01.exceptions;
 
 public class AlreadyExistException extends RuntimeException {
     public AlreadyExistException(String message) {

@@ -1,4 +1,4 @@
-package com.null01.Exceptions;
+package com.null01.exceptions;
 
 public class EmptyBodyException extends RuntimeException{
     public EmptyBodyException(String message){

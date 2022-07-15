@@ -1,9 +1,9 @@
-package com.null01.Interceptors;
+package com.null01.interceptors;
 
-import com.null01.Exceptions.AlreadyExistException;
-import com.null01.Exceptions.EmptyBodyException;
-import com.null01.Exceptions.MisstargetException;
-import com.null01.Exceptions.UnexistanceException;
+import com.null01.exceptions.AlreadyExistException;
+import com.null01.exceptions.EmptyBodyException;
+import com.null01.exceptions.MisstargetException;
+import com.null01.exceptions.UnexistanceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

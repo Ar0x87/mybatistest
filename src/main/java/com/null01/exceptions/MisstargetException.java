@@ -1,4 +1,4 @@
-package com.null01.Exceptions;
+package com.null01.exceptions;
 
 public class MisstargetException extends RuntimeException{
     public MisstargetException(String message) {

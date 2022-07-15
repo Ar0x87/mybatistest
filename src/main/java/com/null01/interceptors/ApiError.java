@@ -1,4 +1,4 @@
-package com.null01.Interceptors;
+package com.null01.interceptors;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

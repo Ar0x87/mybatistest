@@ -1,17 +1,17 @@
 package com.null01.services;
 
-import com.null01.Exceptions.AlreadyExistException;
-import com.null01.Exceptions.MisstargetException;
-import com.null01.Exceptions.EmptyBodyException;
-import com.null01.Exceptions.UnexistanceException;
+import com.null01.exceptions.AlreadyExistException;
+import com.null01.exceptions.MisstargetException;
+import com.null01.exceptions.EmptyBodyException;
+import com.null01.exceptions.UnexistanceException;
 import com.null01.mappers.HotelMapper;
 import com.null01.models.Hotel;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.null01.Requests.RequestStructure;
-import com.null01.Requests.RequestStructureFullLine;
+import com.null01.requests.RequestStructure;
+import com.null01.requests.RequestStructureFullLine;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

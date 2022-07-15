@@ -1,4 +1,4 @@
-package com.null01.Requests;
+package com.null01.requests;
 
 import lombok.Data;
 
