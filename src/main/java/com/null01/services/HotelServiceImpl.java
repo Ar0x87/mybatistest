@@ -51,25 +51,29 @@ public class HotelServiceImpl implements HotelService {
             stp = getIdByName(reqBod.getHotelname());
             rslt = stp.get(0);
         } else {
-            throw new AlreadyExistException("Already exist");
+            throw new AlreadyExistException("Entity with same name already exist");
         }
         return rslt;
     }
 
-   public final Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException {
-        Integer rslt = checkIdExistance(valueOf(reqLin.getId()));
-        if (rslt == null) {
-            throw new UnexistanceException("There is no such ID");
+   public final Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException, NumberFormatException {
+        Integer rslt;
+        if (reqLin.getId() != null && !reqLin.getId().equals("")) {
+            if (checkIdExistance(Integer.parseInt(reqLin.getId())) != null && checkIdExistance(Integer.parseInt(reqLin.getId())) > 0) {
+                hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", reqLin.getAddress()));
+                rslt = Integer.parseInt(reqLin.getId());
+            } else {
+                throw new UnexistanceException("There is no such ID");
+            }
         } else {
-            hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", reqLin.getAddress()));
-            rslt = valueOf(reqLin.getId());
+            throw new NumberFormatException("Bad ID in request");
         }
         return rslt;
    }
 
    public final Integer delJ(Integer id) throws UnexistanceException {
         Integer rslt = checkIdExistance(id);
-        if (rslt == null) {
+        if (rslt == null || rslt == 0) {
             throw new UnexistanceException("There is no such ID");
         } else {
             hotelmapper.delter(rslt);
@@ -90,12 +94,12 @@ public class HotelServiceImpl implements HotelService {
    }
 
    public final Integer patJ(RequestStructureFullLine reqLin) throws MisstargetException, EmptyBodyException {
-        Integer rslt = checkIdExistance(Integer.parseInt(reqLin.getId()));
-        if (rslt == null || rslt == 0) {
+        Integer rslt;
+        if (reqLin.getId() == null || reqLin.getId().equals("") || checkIdExistance(Integer.parseInt(reqLin.getId())) == null) {
             throw new MisstargetException("There is no such entry");
         } else {
             if (reqLin.getHotelname() == null && reqLin.getAddress() == null) {
-                throw new EmptyBodyException("Empty request");
+                throw new EmptyBodyException("Sending request is empty");
             } else {
                 if (reqLin.getHotelname() == null) {
                     hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", getHotelnameById(valueOf(reqLin.getId())), "address", reqLin.getAddress()));
@@ -106,6 +110,7 @@ public class HotelServiceImpl implements HotelService {
                 if (reqLin.getHotelname() != null && reqLin.getAddress() != null) {
                     hotelmapper.puter(Map.of("id", reqLin.getId(), "hotelname", reqLin.getHotelname(), "address", reqLin.getAddress()));
                 }
+                rslt = checkIdExistance(Integer.parseInt(reqLin.getId()));
             }
         }
         return rslt;
@@ -117,8 +122,8 @@ public class HotelServiceImpl implements HotelService {
        return caster(hotelmapper.getHotelMapByName(name));
    }
 
-   public final Integer checkIdExistance(Integer cie) {
-       return hotelmapper.checkIdExistance(cie);
+   public final Integer checkIdExistance(Integer id) {
+       return hotelmapper.checkIdExistance(id);
    }
 
    public final String getHotelnameById(Integer id) {

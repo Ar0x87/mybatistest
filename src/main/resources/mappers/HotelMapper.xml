@@ -36,7 +36,7 @@
     </select>
 
     <select id="checkIdExistance" resultType="java.lang.Integer" parameterType="java.lang.Integer">
-        SELECT id FROM hotel WHERE id = #{cie}
+        SELECT id FROM hotel WHERE id = #{id}
     </select>
 
     <select id="putJ" resultType="java.lang.Integer" parameterType="java.util.Map">

@@ -1,27 +1,39 @@
 package com.null01.Interceptors;
 
-import org.springframework.core.annotation.AnnotationUtils;
+import com.null01.Exceptions.AlreadyExistException;
+import com.null01.Exceptions.EmptyBodyException;
+import com.null01.Exceptions.MisstargetException;
+import com.null01.Exceptions.UnexistanceException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.context.request.WebRequest;
 
 @ControllerAdvice
-
 public class GlobalExceptionHandler {
-    public static final String DEFAULT_ERROR_VIEW = "error";
 
-    @ExceptionHandler(value = Exception.class)
-    public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-        if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null)
-            throw e;
+    @ExceptionHandler(AlreadyExistException.class)
+    protected ResponseEntity<Object> AlreadyExist(RuntimeException e, WebRequest request) {
+        ApiError apiError = new ApiError(412, "EXISTENCE_CONFLICT",  false, e.getMessage());
+        return new ResponseEntity<>(apiError, HttpStatus.I_AM_A_TEAPOT);
+    }
 
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("exception", e);
-        mav.addObject("url", req.getRequestURL());
-        mav.setViewName(DEFAULT_ERROR_VIEW);
-        return mav;
+    @ExceptionHandler(EmptyBodyException.class)
+    protected ResponseEntity<Object> EmptyBody(RuntimeException e, WebRequest request) {
+        ApiError apiError = new ApiError(406, "EMPTY_REQUEST_EXCEPTION", false, e.getMessage());
+        return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MisstargetException.class)
+    protected ResponseEntity<Object> Misstarget(RuntimeException e, WebRequest request) {
+        ApiError apiError = new ApiError(416, "MISSTARGETING", false, e.getMessage());
+        return new ResponseEntity<>(apiError,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({UnexistanceException.class, NumberFormatException.class})
+    protected ResponseEntity<Object> Unexistance(RuntimeException e, WebRequest request) {
+        ApiError apiError = new ApiError(404, "NOT_FOUND", false, e.getMessage());
+        return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
     }
 }
