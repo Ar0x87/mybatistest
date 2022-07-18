@@ -66,7 +66,7 @@ public class HotelController {
 
     @DeleteMapping
     @RequestMapping(value = "/delJ", params = {"name"})
-    public ArrayList<Integer> delJ(@RequestParam(value = "name")String name) throws UnexistanceException {
+    public /*ArrayList<Integer>*/Object delJ(@RequestParam(value = "name")String name) throws UnexistanceException {
         return hotelService.delJ(name);
     }
 
