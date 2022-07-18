@@ -4,10 +4,13 @@ import com.null01.exceptions.AlreadyExistException;
 import com.null01.exceptions.EmptyBodyException;
 import com.null01.exceptions.MisstargetException;
 import com.null01.exceptions.UnexistanceException;
+import com.null01.annotations.EnableResponseWrapper;
 import com.null01.models.Hotel;
 import com.null01.requests.RequestStructure;
 import com.null01.requests.RequestStructureFullLine;
 import com.null01.services.HotelService;
+import com.null01.wrappers.Wrapper;
+
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +29,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@EnableResponseWrapper(wrapperClass = Wrapper.class)
 public class HotelController {
 
 
     @Autowired
     private final HotelService hotelService;
-    //private static final Logger Logger = LoggerFactory.getLogger(HotelController.class);
 
     @GetMapping
     @RequestMapping("/getAll")
