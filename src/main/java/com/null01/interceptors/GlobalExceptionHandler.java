@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
 @ControllerAdvice
@@ -37,4 +38,5 @@ public class GlobalExceptionHandler {
         ApiError apiError = new ApiError(404, "NOT_FOUND", false, e.getMessage());
         return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
     }
+
 }
