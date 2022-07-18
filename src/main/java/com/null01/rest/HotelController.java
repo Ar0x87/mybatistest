@@ -31,7 +31,6 @@ public class HotelController {
 
     @Autowired
     private final HotelService hotelService;
-    //private static final Logger Logger = LoggerFactory.getLogger(HotelController.class);
 
     @GetMapping
     @RequestMapping("/getAll")

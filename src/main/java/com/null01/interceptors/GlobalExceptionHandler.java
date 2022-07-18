@@ -4,6 +4,7 @@ import com.null01.exceptions.AlreadyExistException;
 import com.null01.exceptions.EmptyBodyException;
 import com.null01.exceptions.MisstargetException;
 import com.null01.exceptions.UnexistanceException;
+import com.null01.responses.ApiError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
