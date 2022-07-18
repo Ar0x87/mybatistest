@@ -62,30 +62,14 @@ public class GlobalResultHandler implements ResponseBodyAdvice<Object> {
             return body;
         }
 
-        if (Collection.class.isAssignableFrom(body.getClass())) {
-            try {
-                Collection<?> bodyCollection = (Collection<?>) body;
-
-                if (bodyCollection.isEmpty()) {
-                    return body;
-                }
-                return generateListOfResponseWrapper(bodyCollection, wrapperClass);
-            } catch (Exception e) {
-                return body;
-            }
-        }
         return generateResponseWrapper(body, wrapperClass);
-    }
-
-    private List<IWrapperModel> generateListOfResponseWrapper(Collection<?> bodyCollection, Class<? extends IWrapperModel> wrapperClass) {
-        return bodyCollection.stream().map((t) -> t == null ? null : generateResponseWrapper(t, wrapperClass)).collect(Collectors.toList());
     }
 
     @SneakyThrows
     private IWrapperModel generateResponseWrapper(Object body, Class<? extends IWrapperModel> wrapperClass) {
         IWrapperModel wrapper = wrapperClass.getDeclaredConstructor().newInstance();
+        wrapper.setData(wrapperService.getData());
         wrapper.setBody(body);
-        wrapper.setData(wrapperService.getData(body));
         return wrapper;
     }
 }

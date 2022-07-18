@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface IWrapperService {
-    Responser getData(Object body);
+    Responser getData();
 }

@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +15,7 @@ public class Wrapper extends Responser implements IWrapperModel {
     private Integer code;
     private String message;
     private Boolean success;
+
     Object result;
 
     @Override
