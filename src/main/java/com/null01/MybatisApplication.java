@@ -1,8 +1,15 @@
 package com.null01;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.jdbc.core.JdbcTemplate;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * The main file of application.
@@ -16,8 +23,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @MapperScan("com.null01.mappers")
 @SpringBootApplication
-
 public class MybatisApplication {
+//public class RelationalDataAccessApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(MybatisApplication.class, args);

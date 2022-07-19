@@ -14,6 +14,9 @@ public class Hotel {
     private String hotelname;
     private String address;
 
+    /*public Hotel(int id, String hotelname, String address) {
+    }*/
+
     public Integer getId() {
         return id;
     }
