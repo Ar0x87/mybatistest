@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorer,HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({UnexistanceException.class/*, NumberFormatException.class*/})
+    @ExceptionHandler({UnexistanceException.class, NumberFormatException.class})
     protected ResponseEntity<Object> Unexistance(RuntimeException e) {
         Errorer errorer = new Errorer(404, "NOT_FOUND", false, e.getMessage());
         return new ResponseEntity<>(errorer, HttpStatus.NOT_FOUND);

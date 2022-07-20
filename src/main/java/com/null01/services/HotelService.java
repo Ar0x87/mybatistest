@@ -20,32 +20,28 @@ import java.util.ArrayList;
 
 public interface HotelService {
 
+    //Simple getters
     ArrayList<Hotel> getAll();
-
     ArrayList<Hotel> getByName(String name);
 
-    ArrayList<Hotel> getHotelMapByName(String name);
-
+    //Main logic methods
     Integer postJ(RequestStructure reqBod) throws AlreadyExistException;
-
-    void poster(RequestStructure reqBod);
-
-    void puter(RequestStructureFullLine reqLin);
-
-    Integer checkIdExistance(Integer cie);
-
     Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException;
-
-    void delter(Integer x);
-
     Integer delJ(Integer id) throws UnexistanceException;
-
     ArrayList<Integer> delJ(String name) throws UnexistanceException;
-
     Integer patJ(RequestStructureFullLine reqLin) throws EmptyBodyException, MisstargetException;
 
+    //Auxiliary methods
+    ArrayList<Hotel> getHotelMapByName(String name);
+    Integer checkIdExistance(Integer cie);
     String getHotelnameById(Integer id);
-
     String getAddressById(Integer id);
+    ArrayList<Integer> getIdByName(String name);
+    ArrayList<Integer> caster(ArrayList<Hotel> cst);
+
+    //SQL alternators
+    void poster(RequestStructure reqBod);
+    void puter(RequestStructureFullLine reqLin);
+    void delter(Integer x);
 
 }
