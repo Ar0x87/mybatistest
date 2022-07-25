@@ -33,14 +33,14 @@ public interface HotelService {
     //Auxiliary methods
     ArrayList<Hotel> getHotelMapByName(String name) throws SQLException;
     Integer checkIdExistance(Integer cie) throws SQLException;
-    String getHotelnameById(Integer id);
-    String getAddressById(Integer id);
+    String getHotelnameById(Integer id) throws SQLException;
+    String getAddressById(Integer id) throws SQLException;
     ArrayList<Integer> getIdByName(String name) throws SQLException;
     ArrayList<Integer> caster(ArrayList<Hotel> cst);
 
-    //SQL alternators
+    /*//SQL alternators
     void poster(RequestStructure reqBod);
     void puter(RequestStructureFullLine reqLin);
-    void delter(Integer x);
+    void delter(Integer x);*/
 
 }
