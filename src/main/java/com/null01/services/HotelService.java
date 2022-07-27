@@ -26,8 +26,8 @@ public interface HotelService {
     //Main logic methods
     Integer postJ(RequestStructure reqBod) throws AlreadyExistException, SQLException;
     Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException, SQLException;
-    Integer delJ(Integer id) throws UnexistanceException, SQLException, InvocationTargetException, IllegalAccessException;
-    ArrayList<Integer> delJ(String name) throws UnexistanceException, SQLException, IllegalAccessException, InvocationTargetException;
+    Integer delJ(Integer id) throws UnexistanceException, SQLException;
+    ArrayList<Integer> delJ(String name) throws UnexistanceException, SQLException;
     Integer patJ(RequestStructureFullLine reqLin) throws EmptyBodyException, MisstargetException, SQLException;
 
     //Auxiliary methods

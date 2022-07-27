@@ -8,7 +8,6 @@ import com.null01.requests.RequestStructureFullLine;
 import com.null01.services.HotelService;
 import com.null01.wrappers.Wrapper;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
@@ -58,13 +57,13 @@ public class HotelController {
 
     @DeleteMapping
     @RequestMapping(value = "/delJ", params = {"id"})
-    public Integer delJ(@RequestParam(value = "id")Integer id) throws UnexistanceException, SQLException, InvocationTargetException, IllegalAccessException {
+    public Integer delJ(@RequestParam(value = "id")Integer id) throws UnexistanceException, SQLException {
         return hotelService.delJ(id);
     }
 
     @DeleteMapping
     @RequestMapping(value = "/delJ", params = {"name"})
-    public ArrayList<Integer> delJ(@RequestParam(value = "name")String name) throws UnexistanceException, SQLException, InvocationTargetException, IllegalAccessException {
+    public ArrayList<Integer> delJ(@RequestParam(value = "name")String name) throws UnexistanceException, SQLException {
         return hotelService.delJ(name);
     }
 

@@ -7,10 +7,10 @@ import com.null01.models.Hotel;
 import com.null01.requests.RequestStructure;
 import com.null01.requests.RequestStructureFullLine;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -22,19 +22,21 @@ import static java.lang.Integer.valueOf;
 public class HotelServiceJDBC implements HotelService {
 
     UniversalDataProcessors udp = new UniversalDataProcessors();
+    @Autowired
+    private final ConnectionMinistry cm;
 
     //Simple getters
 
     @Override
     public ArrayList<Hotel> getAll() throws SQLException {
         String sql = "SELECT id, hotelname, address FROM hotel ORDER BY id";
-        return udp.dataProcessor(sql);
+        return udp.dataProcessor(cm, sql);
     }
 
     @Override
     public ArrayList<Hotel> getByName(String name) throws SQLException {
-        String sql = "SELECT id, hotelname, address FROM hotel WHERE lower(hotelname) LIKE lower(concat('%', ?, '%'))";
-        ArrayList<Hotel> result = udp.dataProcessor(sql, name);
+        String sql = "SELECT id, hotelname, address FROM hotel WHERE lower(hotelname) LIKE lower(concat('%', ?, '%')) ORDER BY id";
+        ArrayList<Hotel> result = udp.dataProcessor(cm, sql, name);
         if (result.isEmpty()) {
             throw new UnexistanceException("There is no such hotel");
         } else {
@@ -49,7 +51,7 @@ public class HotelServiceJDBC implements HotelService {
         ArrayList<Integer> stp = getIdByName(reqBod.getHotelname());
         Integer rslt;
         if (stp.isEmpty()) {
-            udp.poster(reqBod);
+            udp.poster(cm, reqBod);
             stp = getIdByName(reqBod.getHotelname());
             rslt = stp.get(0);
         } else {
@@ -63,7 +65,7 @@ public class HotelServiceJDBC implements HotelService {
         Integer rslt;
         if (reqLin.getId() != null && !reqLin.getId().equals("")) {
             if (checkIdExistance(Integer.parseInt(reqLin.getId())) != null && checkIdExistance(Integer.parseInt(reqLin.getId())) > 0) {
-                udp.puter(reqLin);
+                udp.puter(cm, reqLin);
                 rslt = Integer.parseInt(reqLin.getId());
             } else {
                 throw new UnexistanceException("There is no such ID");
@@ -75,9 +77,9 @@ public class HotelServiceJDBC implements HotelService {
     }
 
     @Override
-    public Integer delJ(Integer id) throws UnexistanceException, SQLException, InvocationTargetException, IllegalAccessException {
+    public Integer delJ(Integer id) throws UnexistanceException, SQLException {
         String sql = "SELECT id FROM hotel WHERE id = ?";
-        ArrayList<Integer> arrayList = udp.dataProcessor(sql, id, udp::delter);
+        ArrayList<Integer> arrayList = udp.dataProcessor(cm ,sql, id, udp::delter);
         if (arrayList.isEmpty()) {
             throw new UnexistanceException("Nothing to delete by this id");
         } else {
@@ -86,9 +88,9 @@ public class HotelServiceJDBC implements HotelService {
     }
 
     @Override
-    public ArrayList<Integer> delJ(String name) throws UnexistanceException, SQLException, IllegalAccessException, InvocationTargetException {
+    public ArrayList<Integer> delJ(String name) throws UnexistanceException, SQLException {
         String sql = "SELECT id FROM hotel WHERE hotelname = ?";
-        ArrayList arrayList = udp.dataProcessor(sql, name, udp::delter);
+        ArrayList arrayList = udp.dataProcessor(cm, sql, name, udp::delter);
         if (arrayList.isEmpty()) {
             throw new UnexistanceException("Nothing to delete by this name");
         } else {
@@ -108,14 +110,14 @@ public class HotelServiceJDBC implements HotelService {
                 RequestStructureFullLine rsfl = reqLin;
                 if (reqLin.getHotelname() == null) {
                     rsfl.setHotelname(getHotelnameById(valueOf(reqLin.getId())));
-                    udp.puter(rsfl);
+                    udp.puter(cm, rsfl);
                 }
                 if (reqLin.getAddress() == null) {
                     rsfl.setAddress(getAddressById(valueOf(reqLin.getId())));
-                    udp.puter(rsfl);
+                    udp.puter(cm, rsfl);
                 }
                 if (reqLin.getHotelname() != null && reqLin.getAddress() != null) {
-                    udp.puter(reqLin);
+                    udp.puter(cm, reqLin);
                 }
                 rslt = checkIdExistance(valueOf(reqLin.getId()));
             }
@@ -128,15 +130,15 @@ public class HotelServiceJDBC implements HotelService {
     @Override
     public ArrayList<Hotel> getHotelMapByName(String name) throws SQLException {
         String sql = "SELECT id, hotelname, address FROM hotel WHERE hotelname = ?";
-        return udp.dataProcessor(sql, name);
+        return udp.dataProcessor(cm, sql, name);
     }
 
     @Override
     public Integer checkIdExistance(Integer cie) throws SQLException {
         String sql = "SELECT id, hotelname, address FROM hotel WHERE id = ?";
         Integer result;
-        if (udp.dataProcessor(sql, cie).size() == 1) {
-            Hotel receiving = (Hotel) udp.dataProcessor(sql, cie).get(0);
+        if (udp.dataProcessor(cm, sql, cie).size() == 1) {
+            Hotel receiving = (Hotel) udp.dataProcessor(cm, sql, cie).get(0);
             result = receiving.getId();
         } else {
             result = null;
@@ -148,9 +150,8 @@ public class HotelServiceJDBC implements HotelService {
     public String getHotelnameById(Integer id) throws SQLException {
         String sql = "SELECT hotelname FROM hotel WHERE id = ?";
         String result = null;
-        ConnectionMinistry connectionMinistry = new ConnectionMinistry();
-        if (connectionMinistry.isConnectionSuccess()) {
-            try (PreparedStatement ps = connectionMinistry.connect().prepareStatement(sql)) {
+        if (cm.isConnectionSuccess()) {
+            try (PreparedStatement ps = cm.connect().prepareStatement(sql)) {
                 ps.setInt(1, id);
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
@@ -169,9 +170,8 @@ public class HotelServiceJDBC implements HotelService {
     public String getAddressById(Integer id) throws SQLException {
         String sql = "SELECT address FROM hotel WHERE id = ?";
         String result = null;
-        ConnectionMinistry connectionMinistry = new ConnectionMinistry();
-        if (connectionMinistry.isConnectionSuccess()) {
-            try (PreparedStatement ps = connectionMinistry.connect().prepareStatement(sql)) {
+        if (cm.isConnectionSuccess()) {
+            try (PreparedStatement ps = cm.connect().prepareStatement(sql)) {
                 ps.setInt(1, id);
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {

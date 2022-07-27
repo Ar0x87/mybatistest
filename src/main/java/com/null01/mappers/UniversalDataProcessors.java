@@ -1,6 +1,5 @@
 package com.null01.mappers;
 
-import com.null01.configuration.Properties;
 import com.null01.connectors.ConnectionMinistry;
 import com.null01.exceptions.ConnectionLossException;
 import com.null01.models.Hotel;
@@ -8,20 +7,18 @@ import com.null01.requests.RequestStructure;
 import com.null01.requests.RequestStructureFullLine;
 import lombok.SneakyThrows;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 public class UniversalDataProcessors {
 
-    //Universal methods
+    //Univer sal methods
 
-    public ArrayList dataProcessor(String query) throws SQLException {
-        ConnectionMinistry connectionMinistry = new ConnectionMinistry();
+    public ArrayList dataProcessor(ConnectionMinistry cm, String query) throws SQLException {
         ArrayList<Hotel> hotels = new ArrayList<>();
-        if (connectionMinistry.isConnectionSuccess()) {
-            try (Statement sttmnt = connectionMinistry.connect().createStatement()) {
+        if (cm.isConnectionSuccess()) {
+            try (Statement sttmnt = cm.connect().createStatement()) {
                 try (ResultSet resultSet = sttmnt.executeQuery(query)) {
                     while (resultSet.next()) {
                         Hotel hotel = new Hotel();
@@ -41,11 +38,10 @@ public class UniversalDataProcessors {
         return hotels;
     }
 
-    public ArrayList dataProcessor(String query, String name) throws SQLException {
-        ConnectionMinistry connectionMinistry = new ConnectionMinistry();
+    public ArrayList dataProcessor(ConnectionMinistry cm, String query, String name) throws SQLException {
         ArrayList<Hotel> hotels = new ArrayList<>();
-        if (connectionMinistry.isConnectionSuccess()) {
-            try (PreparedStatement ps = connectionMinistry.connect().prepareStatement(query)) {
+        if (cm.isConnectionSuccess()) {
+            try (PreparedStatement ps = cm.connect().prepareStatement(query)) {
                 ps.setString(1, name);
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
@@ -66,11 +62,10 @@ public class UniversalDataProcessors {
         return hotels;
     }
 
-    public ArrayList dataProcessor(String query, Integer id) throws SQLException {
-        ConnectionMinistry connectionMinistry = new ConnectionMinistry();
+    public ArrayList dataProcessor(ConnectionMinistry cm, String query, Integer id) throws SQLException {
         ArrayList<Hotel> hotels = new ArrayList<>();
-        if (connectionMinistry.isConnectionSuccess()) {
-            try (PreparedStatement ps = connectionMinistry.connect().prepareStatement(query)) {
+        if (cm.isConnectionSuccess()) {
+            try (PreparedStatement ps = cm.connect().prepareStatement(query)) {
                 ps.setInt(1, id);
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
@@ -91,16 +86,15 @@ public class UniversalDataProcessors {
         return hotels;
     }
 
-    public ArrayList dataProcessor(String query, String name, Consumer<Integer> method) throws SQLException, IllegalAccessException, InvocationTargetException {
-        ConnectionMinistry connectionMinistry = new ConnectionMinistry();
+    public ArrayList dataProcessor(ConnectionMinistry cm, String query, String name, BiConsumer<ConnectionMinistry, Integer> method) throws SQLException {
         ArrayList<Integer> result = new ArrayList<>();
-        if (connectionMinistry.isConnectionSuccess()) {
-            try (PreparedStatement ps = connectionMinistry.connect().prepareStatement(query)) {
+        if (cm.isConnectionSuccess()) {
+            try (PreparedStatement ps = cm.connect().prepareStatement(query)) {
                 ps.setString(1, name);
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         result.add(rs.getInt("id"));
-                        method.accept(rs.getInt("id"));
+                        method.accept(cm, rs.getInt("id"));
                     }
                     return result;
                 }
@@ -113,16 +107,15 @@ public class UniversalDataProcessors {
         return result;
     }
 
-    public ArrayList dataProcessor(String query, Integer id, Consumer<Integer> method) throws SQLException, IllegalAccessException, InvocationTargetException {
-        ConnectionMinistry connectionMinistry = new ConnectionMinistry();
+    public ArrayList dataProcessor(ConnectionMinistry cm, String query, Integer id, BiConsumer<ConnectionMinistry, Integer> method) throws SQLException {
         ArrayList<Integer> result = new ArrayList<>();
-        if (connectionMinistry.isConnectionSuccess()) {
-            try (PreparedStatement ps = connectionMinistry.connect().prepareStatement(query)) {
+        if (cm.isConnectionSuccess()) {
+            try (PreparedStatement ps = cm.connect().prepareStatement(query)) {
                 ps.setInt(1, id);
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         result.add(rs.getInt("id"));
-                        method.accept(rs.getInt("id"));
+                        method.accept(cm, rs.getInt("id"));
                     }
                     return result;
                 }
@@ -138,11 +131,10 @@ public class UniversalDataProcessors {
     //SQL alternators
 
     @SneakyThrows
-    public void poster(RequestStructure reqBod) {
+    public void poster(ConnectionMinistry cm, RequestStructure reqBod) {
         String sql = "SELECT setval('hotel_id_seq', (SELECT max(id) FROM hotel));" +
                 "INSERT INTO hotel(id, hotelname, address) VALUES (nextval('hotel_id_seq'), '"+ reqBod.getHotelname() +"' , '"+ reqBod.getAddress() +"' );";
-        Properties proper = new Properties();
-        Connection con = DriverManager.getConnection(proper.getUrl(), proper.getUser(), proper.getPassword());
+        Connection con = cm.connect();
         PreparedStatement ps = con.prepareStatement(sql);
         try {
             ps.executeQuery();
@@ -152,10 +144,9 @@ public class UniversalDataProcessors {
     }
 
     @SneakyThrows
-    public void puter(RequestStructureFullLine reqLin) {
+    public void puter(ConnectionMinistry cm, RequestStructureFullLine reqLin) {
         String sql = "UPDATE hotel SET hotelname = '" +reqLin.getHotelname()+ "', address = '" +reqLin.getAddress()+ "' WHERE id = '" +Integer.parseInt(reqLin.getId())+ "';";
-        Properties proper = new Properties();
-        Connection con = DriverManager.getConnection(proper.getUrl(), proper.getUser(), proper.getPassword());
+        Connection con = cm.connect();
         PreparedStatement ps = con.prepareStatement(sql);
         try {
             ps.executeQuery();
@@ -165,10 +156,9 @@ public class UniversalDataProcessors {
     }
 
     @SneakyThrows
-    public void delter(Integer x) {
+    public void delter(ConnectionMinistry cm, Integer x) {
         String sql = "DELETE FROM hotel WHERE id = ?";
-        Properties proper = new Properties();
-        Connection con = DriverManager.getConnection(proper.getUrl(), proper.getUser(), proper.getPassword());
+        Connection con = cm.connect();
         PreparedStatement ps = con.prepareStatement(sql);
         try {
             ps.setInt(1, x);
