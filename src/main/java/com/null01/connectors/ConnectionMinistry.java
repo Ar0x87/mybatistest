@@ -24,7 +24,7 @@ public class ConnectionMinistry {
     static final Logger log = LoggerFactory.getLogger(ConnectionMinistry.class);
 
     public boolean isConnectionSuccess() throws SQLException {
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         connectionInstallation = DriverManager.getConnection(proper.getUrl(), proper.getUsername(), proper.getPassword());
             log.debug("Checking connection ability...");
             if (connectionInstallation != null){

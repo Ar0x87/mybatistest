@@ -22,7 +22,7 @@ public class UniversalDataProcessors {
     public ArrayList dataProcessor(ConnectionMinistry cm, String query) throws SQLException {
         ArrayList<Hotel> hotels = new ArrayList<>();
         if (cm.isConnectionSuccess()) {
-            log.info("*-----------------------------------------------------------------------------------------*");
+            log.debug("*-----------------------------------------------------------------------------------------*");
             try (Statement sttmnt = cm.connect().createStatement()) {
                 try (ResultSet resultSet = sttmnt.executeQuery(query)) {
                     log.info("          id  name     address");
@@ -51,7 +51,7 @@ public class UniversalDataProcessors {
     public ArrayList dataProcessor(ConnectionMinistry cm, String query, String name) throws SQLException {
         ArrayList<Hotel> hotels = new ArrayList<>();
         if (cm.isConnectionSuccess()) {
-            log.info("*-----------------------------------------------------------------------------------------*");
+            log.debug("*-----------------------------------------------------------------------------------------*");
             try (PreparedStatement ps = cm.connect().prepareStatement(query)) {
                 ps.setString(1, name);
                 try (ResultSet rs = ps.executeQuery()) {
@@ -81,7 +81,7 @@ public class UniversalDataProcessors {
     public ArrayList dataProcessor(ConnectionMinistry cm, String query, Integer id) throws SQLException {
         ArrayList<Hotel> hotels = new ArrayList<>();
         if (cm.isConnectionSuccess()) {
-            log.info("*-----------------------------------------------------------------------------------------*");
+            log.debug("*-----------------------------------------------------------------------------------------*");
             try (PreparedStatement ps = cm.connect().prepareStatement(query)) {
                 ps.setInt(1, id);
                 try (ResultSet rs = ps.executeQuery()) {
@@ -110,7 +110,7 @@ public class UniversalDataProcessors {
     public ArrayList dataProcessor(ConnectionMinistry cm, String query, String name, BiConsumer<ConnectionMinistry, Integer> method) throws SQLException {
         ArrayList<Integer> result = new ArrayList<>();
         if (cm.isConnectionSuccess()) {
-            log.info("*-----------------------------------------------------------------------------------------*");
+            log.debug("*-----------------------------------------------------------------------------------------*");
             try (PreparedStatement ps = cm.connect().prepareStatement(query)) {
                 ps.setString(1, name);
                 try (ResultSet rs = ps.executeQuery()) {
@@ -137,7 +137,7 @@ public class UniversalDataProcessors {
     public ArrayList dataProcessor(ConnectionMinistry cm, String query, Integer id, BiConsumer<ConnectionMinistry, Integer> method) throws SQLException {
         ArrayList<Integer> result = new ArrayList<>();
         if (cm.isConnectionSuccess()) {
-            log.info("*-----------------------------------------------------------------------------------------*");
+            log.debug("*-----------------------------------------------------------------------------------------*");
             try (PreparedStatement ps = cm.connect().prepareStatement(query)) {
                 ps.setInt(1, id);
                 try (ResultSet rs = ps.executeQuery()) {
@@ -168,7 +168,7 @@ public class UniversalDataProcessors {
                 "INSERT INTO hotel(id, hotelname, address) VALUES (nextval('hotel_id_seq'), '"+ reqBod.getHotelname() +"' , '"+ reqBod.getAddress() +"' );";
         Connection con = cm.connect();
         PreparedStatement ps = con.prepareStatement(sql);
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = poster");
         log.debug("INVOLVED_METHOD_TYPE = SQL alternator");
         log.debug("INVOLVED_METHOD_BELONGING = UniversalDataProcessors");
@@ -186,7 +186,7 @@ public class UniversalDataProcessors {
         String sql = "UPDATE hotel SET hotelname = '" +reqLin.getHotelname()+ "', address = '" +reqLin.getAddress()+ "' WHERE id = '" +Integer.parseInt(reqLin.getId())+ "';";
         Connection con = cm.connect();
         PreparedStatement ps = con.prepareStatement(sql);
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = puter");
         log.debug("INVOLVED_METHOD_TYPE = SQL alternator");
         log.debug("INVOLVED_METHOD_BELONGING = UniversalDataProcessors");
@@ -204,7 +204,7 @@ public class UniversalDataProcessors {
         String sql = "DELETE FROM hotel WHERE id = ?";
         Connection con = cm.connect();
         PreparedStatement ps = con.prepareStatement(sql);
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = delter");
         log.debug("INVOLVED_METHOD_TYPE = SQL alternator");
         log.debug("INVOLVED_METHOD_BELONGING = UniversalDataProcessors");

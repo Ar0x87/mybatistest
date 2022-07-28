@@ -40,7 +40,7 @@ public class HotelController {
     @GetMapping
     @RequestMapping("/getAll")
     public ArrayList<Hotel> getAll() throws SQLException {
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("Request received and passed to the service.");
         log.debug("Involved method REST_TYPE = GET");
         log.debug("Involved method NAME = getAll");
@@ -53,7 +53,7 @@ public class HotelController {
     @GetMapping
     @RequestMapping("/getByName")
     public ArrayList<Hotel> getByName(@RequestParam(value = "name") String name) throws SQLException {
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("Request received and passed to the service.");
         log.debug("Involved method REST_TYPE = GET");
         log.debug("Involved method NAME = getByName");
@@ -65,7 +65,7 @@ public class HotelController {
 
     @PostMapping(value = "/postJ", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Integer postJ(@RequestBody RequestStructure reqBod) throws AlreadyExistException, SQLException {
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("Request received and passed to the service.");
         log.debug("Involved method REST_TYPE = POST");
         log.debug("Involved method NAME = postJ");
@@ -77,7 +77,7 @@ public class HotelController {
 
     @PutMapping(value = "/putJ", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Integer putJ(@RequestBody RequestStructureFullLine reqLin) throws UnexistanceException, SQLException {
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("Request received and passed to the service.");
         log.debug("Involved method REST_TYPE = PUT");
         log.debug("Involved method NAME = putJ");
@@ -90,7 +90,7 @@ public class HotelController {
     @DeleteMapping
     @RequestMapping(value = "/delJ", params = {"id"})
     public Integer delJ(@RequestParam(value = "id")Integer id) throws UnexistanceException, SQLException {
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("Request received and passed to the service.");
         log.debug("Involved method REST_TYPE = DELETE");
         log.debug("Involved method NAME = delJ");
@@ -103,7 +103,7 @@ public class HotelController {
     @DeleteMapping
     @RequestMapping(value = "/delJ", params = {"name"})
     public ArrayList<Integer> delJ(@RequestParam(value = "name")String name) throws UnexistanceException, SQLException {
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("Request received and passed to the service.");
         log.debug("Involved method REST_TYPE = DELETE");
         log.debug("Involved method NAME = delJ");

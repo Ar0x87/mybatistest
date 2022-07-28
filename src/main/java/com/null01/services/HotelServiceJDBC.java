@@ -33,7 +33,7 @@ public class HotelServiceJDBC implements HotelService {
     @Override
     public ArrayList<Hotel> getAll() throws SQLException {
         String sql = "SELECT id, hotelname, address FROM hotel ORDER BY id";
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("JDBC using.");
         log.debug("INVOLVED_METHOD_NAME = getAll");
         log.debug("INVOLVED_METHOD_TYPE = Simple getter");
@@ -46,7 +46,7 @@ public class HotelServiceJDBC implements HotelService {
     @Override
     public ArrayList<Hotel> getByName(String name) throws SQLException {
         String sql = "SELECT id, hotelname, address FROM hotel WHERE lower(hotelname) LIKE lower(concat('%', ?, '%')) ORDER BY id";
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("JDBC using.");
         log.debug("INVOLVED_METHOD_NAME = getByName");
         log.debug("INVOLVED_METHOD_TYPE = Simple getter");
@@ -57,10 +57,8 @@ public class HotelServiceJDBC implements HotelService {
         if (result.isEmpty()) {
             log.warn("Not found hotel with name like request.");
             log.info("Try another name.");
-            throw new UnexistanceException("There is no such hotel");
-        } else {
-            return result;
         }
+            return result;
     }
 
     //Main Logic of "additionalMethodLogic" branch
@@ -68,7 +66,7 @@ public class HotelServiceJDBC implements HotelService {
     @Override
     public Integer postJ(RequestStructure reqBod) throws AlreadyExistException, SQLException {
         ArrayList<Integer> stp = getIdByName(reqBod.getHotelname());
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = postJ");
         log.debug("INVOLVED_METHOD_TYPE = Main logic");
         log.debug("INVOLVED_METHOD_BELONGING = HotelServiceJDBC");
@@ -89,7 +87,7 @@ public class HotelServiceJDBC implements HotelService {
     @Override
     public Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException, SQLException {
         Integer rslt;
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = putJ");
         log.debug("INVOLVED_METHOD_TYPE = Main logic");
         log.debug("INVOLVED_METHOD_BELONGING = HotelServiceJDBC");
@@ -113,7 +111,7 @@ public class HotelServiceJDBC implements HotelService {
     public Integer delJ(Integer id) throws UnexistanceException, SQLException {
         String sql = "SELECT id FROM hotel WHERE id = ?";
         ArrayList<Integer> arrayList = udp.dataProcessor(cm ,sql, id, udp::delter);
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = delJ");
         log.debug("INVOLVED_METHOD_TYPE = Main logic");
         log.debug("INVOLVED_METHOD_BELONGING = HotelServiceJDBC");
@@ -131,7 +129,7 @@ public class HotelServiceJDBC implements HotelService {
     public ArrayList<Integer> delJ(String name) throws UnexistanceException, SQLException {
         String sql = "SELECT id FROM hotel WHERE hotelname = ?";
         ArrayList arrayList = udp.dataProcessor(cm, sql, name, udp::delter);
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = delJ");
         log.debug("INVOLVED_METHOD_TYPE = Main logic");
         log.debug("INVOLVED_METHOD_BELONGING = HotelServiceJDBC");
@@ -148,7 +146,7 @@ public class HotelServiceJDBC implements HotelService {
     @Override
     public Integer patJ(RequestStructureFullLine reqLin) throws EmptyBodyException, MisstargetException, SQLException {
         Integer rslt;
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = datJ");
         log.debug("INVOLVED_METHOD_TYPE = Main logic");
         log.debug("INVOLVED_METHOD_BELONGING = HotelServiceJDBC");
@@ -186,7 +184,7 @@ public class HotelServiceJDBC implements HotelService {
     @Override
     public ArrayList<Hotel> getHotelMapByName(String name) throws SQLException {
         String sql = "SELECT id, hotelname, address FROM hotel WHERE hotelname = ?";
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = getHotelMapByName");
         log.debug("INVOLVED_METHOD_TYPE = Auxiliary");
         log.debug("INVOLVED_METHOD_BELONGING = HotelServiceJDBC");
@@ -198,7 +196,7 @@ public class HotelServiceJDBC implements HotelService {
     public Integer checkIdExistance(Integer cie) throws SQLException {
         String sql = "SELECT id, hotelname, address FROM hotel WHERE id = ?";
         Integer result;
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = checkIdExistance");
         log.debug("INVOLVED_METHOD_TYPE = Auxiliary");
         log.debug("INVOLVED_METHOD_BELONGING = HotelServiceJDBC");
@@ -217,7 +215,7 @@ public class HotelServiceJDBC implements HotelService {
     public String getHotelnameById(Integer id) throws SQLException {
         String sql = "SELECT hotelname FROM hotel WHERE id = ?";
         String result = null;
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = getHotelnameById");
         log.debug("INVOLVED_METHOD_TYPE = Auxiliary");
         log.debug("INVOLVED_METHOD_BELONGING = HotelServiceJDBC");
@@ -244,7 +242,7 @@ public class HotelServiceJDBC implements HotelService {
     public String getAddressById(Integer id) throws SQLException {
         String sql = "SELECT address FROM hotel WHERE id = ?";
         String result = null;
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = getAddressById");
         log.debug("INVOLVED_METHOD_TYPE = Auxiliary");
         log.debug("INVOLVED_METHOD_BELONGING = HotelServiceJDBC");
@@ -269,7 +267,7 @@ public class HotelServiceJDBC implements HotelService {
 
     @Override
     public ArrayList<Integer> getIdByName(String name) throws SQLException {
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = getIdByName");
         log.debug("INVOLVED_METHOD_TYPE = Auxiliary");
         log.debug("INVOLVED_METHOD_BELONGING = HotelServiceJDBC");
@@ -281,7 +279,7 @@ public class HotelServiceJDBC implements HotelService {
     @Override
     public ArrayList<Integer> caster(ArrayList<Hotel> cst) {
         ArrayList<Integer> rslt = new ArrayList<>();
-        log.info("*-----------------------------------------------------------------------------------------*");
+        log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = caster");
         log.debug("INVOLVED_METHOD_TYPE = Auxiliary");
         log.debug("INVOLVED_METHOD_BELONGING = HotelServiceJDBC");
