@@ -6,12 +6,14 @@ import com.null01.mappers.UniversalDataProcessors;
 import com.null01.models.Hotel;
 import com.null01.requests.RequestStructure;
 import com.null01.requests.RequestStructureFullLine;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import static java.lang.Integer.valueOf;
 @Primary
 @RequiredArgsConstructor
 @Service
+@Valid
 public class HotelServiceJDBC implements HotelService {
 
     @Autowired
@@ -63,15 +66,15 @@ public class HotelServiceJDBC implements HotelService {
 
     //Main Logic of "additionalMethodLogic" branch
 
-    @Override
-    public Integer postJ(RequestStructure reqBod) throws AlreadyExistException, SQLException {
+    /*@Override
+    public Integer postJ(@Valid RequestStructure reqBod) throws AlreadyExistException, SQLException {
         ArrayList<Integer> stp = getIdByName(reqBod.getHotelname());
         log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = postJ");
         log.debug("INVOLVED_METHOD_TYPE = Main logic");
         log.debug("INVOLVED_METHOD_BELONGING = HotelServiceJDBC");
         log.info("Method returns Integer.");
-        Integer rslt;
+        Integer rslt; // = null;
         if (stp.isEmpty()) {
             udp.poster(cm, reqBod);
             stp = getIdByName(reqBod.getHotelname());
@@ -79,10 +82,10 @@ public class HotelServiceJDBC implements HotelService {
         } else {
             log.warn("Entity with same name already exists.");
             log.info("Try another hotelname.");
-            throw new AlreadyExistException("Entity with same name already exist");
+           throw new AlreadyExistException("Entity with same name already exist");
         }
         return rslt;
-    }
+    }*/
 
     @Override
     public Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException, SQLException {

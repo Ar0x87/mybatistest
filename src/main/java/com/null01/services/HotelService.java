@@ -5,6 +5,7 @@ import com.null01.models.Hotel;
 import com.null01.requests.RequestStructure;
 import com.null01.requests.RequestStructureFullLine;
 
+import javax.validation.Valid;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public interface HotelService {
     ArrayList<Hotel> getByName(String name) throws SQLException;
 
     //Main logic methods
-    Integer postJ(RequestStructure reqBod) throws AlreadyExistException, SQLException;
+    //Integer postJ(@Valid RequestStructure reqBod) throws AlreadyExistException, SQLException;
     Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException, SQLException;
     Integer delJ(Integer id) throws UnexistanceException, SQLException;
     ArrayList<Integer> delJ(String name) throws UnexistanceException, SQLException;

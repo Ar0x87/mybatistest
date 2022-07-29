@@ -28,7 +28,7 @@ import static java.lang.Integer.valueOf;
  */
 @RequiredArgsConstructor
 @Service
-public class HotelServiceImpl implements HotelService {
+public class HotelServiceImpl /*implements HotelService*/ {
 
     @Autowired
     private final HotelMapper hotelmapper;
@@ -43,7 +43,7 @@ public class HotelServiceImpl implements HotelService {
 
     //Main Logic of "additionalMethodLogic" branch
 
-    public final Integer postJ(RequestStructure reqBod) throws AlreadyExistException {
+    /*public final Integer postJ(RequestStructure reqBod) throws AlreadyExistException {
         ArrayList<Integer> stp = getIdByName(reqBod.getHotelname());
         Integer rslt;
         if (stp.isEmpty()) {
@@ -54,7 +54,7 @@ public class HotelServiceImpl implements HotelService {
             throw new AlreadyExistException("Entity with same name already exist");
         }
         return rslt;
-    }
+    }*/
 
    public final Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException, NumberFormatException {
         Integer rslt;

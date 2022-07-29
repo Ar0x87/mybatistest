@@ -9,6 +9,7 @@ import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.validation.Valid;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.function.BiConsumer;
@@ -17,7 +18,7 @@ public class UniversalDataProcessors {
 
     static final Logger log = LoggerFactory.getLogger(UniversalDataProcessors.class);
 
-    //Univer sal methods
+    //Universal methods
 
     public ArrayList dataProcessor(ConnectionMinistry cm, String query) throws SQLException {
         ArrayList<Hotel> hotels = new ArrayList<>();
@@ -163,9 +164,9 @@ public class UniversalDataProcessors {
     //SQL alternators
 
     @SneakyThrows
-    public void poster(ConnectionMinistry cm, RequestStructure reqBod) {
-        String sql = "SELECT setval('hotel_id_seq', (SELECT max(id) FROM hotel));" +
-                "INSERT INTO hotel(id, hotelname, address) VALUES (nextval('hotel_id_seq'), '"+ reqBod.getHotelname() +"' , '"+ reqBod.getAddress() +"' );";
+    public void poster(ConnectionMinistry cm, @Valid RequestStructure reqBod) {
+        String sql = "SELECT setval('hotel_id_seq', (SELECT max(id) FROM hotel));";// +
+                //"INSERT INTO hotel(id, hotelname, address) VALUES (nextval('hotel_id_seq'), '"+ reqBod.getHotelname() +"' , '"+ reqBod.getAddress() +"' );";
         Connection con = cm.connect();
         PreparedStatement ps = con.prepareStatement(sql);
         log.debug("*-----------------------------------------------------------------------------------------*");
