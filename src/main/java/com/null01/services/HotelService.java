@@ -3,10 +3,10 @@ package com.null01.services;
 import com.null01.exceptions.*;
 import com.null01.models.Hotel;
 import com.null01.requests.RequestStructure;
-import com.null01.requests.RequestStructureFullLine;
+import com.null01.requests.StructureForPatch;
+import com.null01.requests.StructureForPut;
 
 import javax.validation.Valid;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -25,11 +25,11 @@ public interface HotelService {
     ArrayList<Hotel> getByName(String name) throws SQLException;
 
     //Main logic methods
-    //Integer postJ(@Valid RequestStructure reqBod) throws AlreadyExistException, SQLException;
-    Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException, SQLException;
+    Integer postJ(@Valid RequestStructure reqBod) throws AlreadyExistException, SQLException;
+    Integer putJ(@Valid StructureForPut reqLin) throws UnexistanceException, SQLException;
     Integer delJ(Integer id) throws UnexistanceException, SQLException;
     ArrayList<Integer> delJ(String name) throws UnexistanceException, SQLException;
-    Integer patJ(RequestStructureFullLine reqLin) throws EmptyBodyException, MisstargetException, SQLException;
+    Integer patJ(@Valid StructureForPatch reqLin) throws EmptyBodyException, MisstargetException, SQLException;
 
     //Auxiliary methods
     ArrayList<Hotel> getHotelMapByName(String name) throws SQLException;

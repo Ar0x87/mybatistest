@@ -5,15 +5,16 @@ import com.null01.exceptions.*;
 import com.null01.mappers.UniversalDataProcessors;
 import com.null01.models.Hotel;
 import com.null01.requests.RequestStructure;
-import com.null01.requests.RequestStructureFullLine;
 import javax.validation.Valid;
+
+import com.null01.requests.StructureForPatch;
+import com.null01.requests.StructureForPut;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class HotelServiceJDBC implements HotelService {
 
     //Main Logic of "additionalMethodLogic" branch
 
-    /*@Override
+    @Override
     public Integer postJ(@Valid RequestStructure reqBod) throws AlreadyExistException, SQLException {
         ArrayList<Integer> stp = getIdByName(reqBod.getHotelname());
         log.debug("*-----------------------------------------------------------------------------------------*");
@@ -85,10 +86,10 @@ public class HotelServiceJDBC implements HotelService {
            throw new AlreadyExistException("Entity with same name already exist");
         }
         return rslt;
-    }*/
+    }
 
     @Override
-    public Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException, SQLException {
+    public Integer putJ(StructureForPut reqLin) throws UnexistanceException, SQLException {
         Integer rslt;
         log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = putJ");
@@ -147,7 +148,7 @@ public class HotelServiceJDBC implements HotelService {
     }
 
     @Override
-    public Integer patJ(RequestStructureFullLine reqLin) throws EmptyBodyException, MisstargetException, SQLException {
+    public Integer patJ(StructureForPatch reqLin) throws EmptyBodyException, MisstargetException, SQLException {
         Integer rslt;
         log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = datJ");
@@ -164,7 +165,7 @@ public class HotelServiceJDBC implements HotelService {
                 log.info("At least one field at least empty is required.");
                 throw new EmptyBodyException("Sending request is empty");
             } else {
-                RequestStructureFullLine rsfl = reqLin;
+                StructureForPatch rsfl = reqLin;
                 if (reqLin.getHotelname() == null) {
                     rsfl.setHotelname(getHotelnameById(valueOf(reqLin.getId())));
                     udp.puter(cm, rsfl);

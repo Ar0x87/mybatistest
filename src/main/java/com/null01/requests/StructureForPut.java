@@ -1,19 +1,19 @@
 package com.null01.requests;
 
 import com.null01.validators.annotations.AddressValidation;
+import com.null01.validators.annotations.IdValidation;
 import com.null01.validators.annotations.NameValidation;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
-
 @Data
-public class RequestStructure {
+public class StructureForPut extends RequestStructureFullLine {
 
-    @NotBlank
+    @IdValidation
+    private String id;
+
     @NameValidation
     private String hotelname;
 
-    @NotBlank
     @AddressValidation
     private String address;
 

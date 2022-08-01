@@ -165,8 +165,8 @@ public class UniversalDataProcessors {
 
     @SneakyThrows
     public void poster(ConnectionMinistry cm, @Valid RequestStructure reqBod) {
-        String sql = "SELECT setval('hotel_id_seq', (SELECT max(id) FROM hotel));";// +
-                //"INSERT INTO hotel(id, hotelname, address) VALUES (nextval('hotel_id_seq'), '"+ reqBod.getHotelname() +"' , '"+ reqBod.getAddress() +"' );";
+        String sql = "SELECT setval('hotel_id_seq', (SELECT max(id) FROM hotel));" +
+                "INSERT INTO hotel(id, hotelname, address) VALUES (nextval('hotel_id_seq'), '"+ reqBod.getHotelname() +"' , '"+ reqBod.getAddress() +"' );";
         Connection con = cm.connect();
         PreparedStatement ps = con.prepareStatement(sql);
         log.debug("*-----------------------------------------------------------------------------------------*");

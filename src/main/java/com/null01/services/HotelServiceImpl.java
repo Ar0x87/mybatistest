@@ -56,7 +56,7 @@ public class HotelServiceImpl /*implements HotelService*/ {
         return rslt;
     }*/
 
-   public final Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException, NumberFormatException {
+   /*public final Integer putJ(RequestStructureFullLine reqLin) throws UnexistanceException, NumberFormatException {
         Integer rslt;
         if (reqLin.getId() != null && !reqLin.getId().equals("")) {
             if (checkIdExistance(Integer.parseInt(reqLin.getId())) != null && checkIdExistance(Integer.parseInt(reqLin.getId())) > 0) {
@@ -156,6 +156,6 @@ public class HotelServiceImpl /*implements HotelService*/ {
    }
 
    public final void delter(Integer x) {
-   }
+   }*/
 
 }

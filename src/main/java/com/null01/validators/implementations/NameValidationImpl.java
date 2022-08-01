@@ -9,12 +9,11 @@ public class NameValidationImpl implements ConstraintValidator<NameValidation, S
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        if (value.equals("") || value == null || value.length() > 30) {
+        if (value.equals("") || value == null || value.length() > 50 || value.length() < 2) {
             return false;
         } else {
             return true;
         }
-        //String pattern = "(.+)";
     }
 
 }
