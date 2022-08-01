@@ -12,12 +12,10 @@ public class AddressValidationNotStrictImpl implements ConstraintValidator<Addre
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         try {
-            Pattern p1 = Pattern.compile("(г. {1})(\\D*)(, ул. {1})(\\D*)(, д. {1})(\\d{1,4})");
-            Pattern p2 = Pattern.compile("(\\D{2,50})");
-            Matcher m1 = p1.matcher(value);
-            Matcher m2 = p2.matcher(value);
+            Pattern p = Pattern.compile("(г. {1})(\\D*)(, ул. {1})(\\D*)(, д. {1})(\\d{1,4})");
+            Matcher m = p.matcher(value);
             if (value.length() < 100) {
-                if (m1.find() || m2.find()) {
+                if (m.find()) {
                     return true;
                 } else {
                     return false;

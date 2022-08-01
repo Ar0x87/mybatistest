@@ -4,17 +4,13 @@ import com.null01.validators.annotations.AddressValidation;
 import com.null01.validators.annotations.NameValidation;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
-
 @Data
 public class RequestStructure {
 
-    @NotBlank
-    @NameValidation
+    @NameValidation(message = "Invalid hotelname")
     private String hotelname;
 
-    @NotBlank
-    @AddressValidation
+    @AddressValidation(message = "Invalid address")
     private String address;
 
 }

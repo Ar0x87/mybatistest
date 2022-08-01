@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -39,11 +40,6 @@ public class HotelController {
     @Autowired
     private final HotelService hotelService;
     static final Logger log = LoggerFactory.getLogger(HotelController.class);
-
-    /*    @PostMapping("/valPo")
-    public ResponseEntity<String> valPo(@RequestBody @Valid RequestStructure input) {
-        return ResponseEntity.ok("Valid");
-    }*/
 
     @GetMapping
     @RequestMapping("/getAll")
@@ -131,6 +127,23 @@ public class HotelController {
         log.info("EXPECTED_NUMBER_OF_RESULTS = 1");
         log.info("EXPECTED_TYPE_OF_RESULT = Integer");
         return hotelService.patJ(reqLin);
+    }
+
+    //Debug requests
+
+    @PostMapping("/valPost")
+    public Integer valPost(@RequestBody @Valid RequestStructure input) throws MethodArgumentNotValidException {
+        return 1;
+    }
+
+    @PutMapping("/valPut")
+    public Integer valPut(@RequestBody @Valid StructureForPut input) throws MethodArgumentNotValidException {
+        return 1;
+    }
+
+    @PatchMapping("/valPatch")
+    public Integer valPatch(@RequestBody @Valid StructureForPatch input) throws MethodArgumentNotValidException {
+        return 1;
     }
 
 }

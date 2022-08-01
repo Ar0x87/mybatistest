@@ -4,6 +4,7 @@ import com.null01.exceptions.*;
 import com.null01.wrappers.Errorer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -41,4 +42,19 @@ public class GlobalExceptionHandler {
         Errorer errorer = new Errorer(500, "INTERNAL_SERVER_ERROR", false, e.getMessage());
         return new ResponseEntity<>(errorer, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    protected ResponseEntity<Object> Invalidity(MethodArgumentNotValidException e) {
+        Errorer errorer = new Errorer(400, "BAD_REQUEST", false, e.getMessage());
+        return new ResponseEntity<>(errorer, HttpStatus.BAD_REQUEST);
+    }
+
+    //Debug
+
+    @ExceptionHandler(Exception.class)
+    protected ResponseEntity<Object> HandleException(Exception e) {
+        Errorer errorer = new Errorer(600, "UNHANDLED", false, e.getMessage());
+        return new ResponseEntity<>(errorer, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

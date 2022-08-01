@@ -70,12 +70,12 @@ public class HotelServiceJDBC implements HotelService {
     @Override
     public Integer postJ(@Valid RequestStructure reqBod) throws AlreadyExistException, SQLException {
         ArrayList<Integer> stp = getIdByName(reqBod.getHotelname());
+        Integer rslt;
         log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("INVOLVED_METHOD_NAME = postJ");
         log.debug("INVOLVED_METHOD_TYPE = Main logic");
         log.debug("INVOLVED_METHOD_BELONGING = HotelServiceJDBC");
         log.info("Method returns Integer.");
-        Integer rslt; // = null;
         if (stp.isEmpty()) {
             udp.poster(cm, reqBod);
             stp = getIdByName(reqBod.getHotelname());
@@ -83,9 +83,10 @@ public class HotelServiceJDBC implements HotelService {
         } else {
             log.warn("Entity with same name already exists.");
             log.info("Try another hotelname.");
-           throw new AlreadyExistException("Entity with same name already exist");
-        }
+            throw new AlreadyExistException("Entity with same name already exist");
+            }
         return rslt;
+
     }
 
     @Override
