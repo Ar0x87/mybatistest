@@ -4,11 +4,16 @@ import com.null01.exceptions.*;
 import com.null01.wrappers.Errorer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,7 +50,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorer, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    /*@ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<Object> Invalidity(MethodArgumentNotValidException e) {
         Pattern p1 = Pattern.compile("(Invalid{1})(\\D*)(\\Q]]\\E)");
         Pattern p2 = Pattern.compile("(Invalid {1})(\\D{2,9})(\\Q]]\\E)(\\D+)(Invalid{1})(\\D*)(\\Q]]\\E)");
@@ -63,7 +68,29 @@ public class GlobalExceptionHandler {
         if (m3.find()) {
             descript = m3.group(1) + m3.group(2) + ", " + m3.group(5) + m3.group(6) + ", " + m3.group(9) + m3.group(10);
         }
-        Errorer errorer = new Errorer(400, "BAD_REQUEST", false, /*e.getMessage()*/descript);
+        Errorer errorer = new Errorer(400, "BAD_REQUEST", false, descript);
+        return new ResponseEntity<>(errorer, HttpStatus.BAD_REQUEST);
+    }*/
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        ArrayList<String> notVals = new ArrayList<>();
+        notVals.add(errors.get("id"));
+        notVals.add(errors.get("hotelname"));
+        notVals.add(errors.get("address"));
+        String descript = "|";
+        for (String er : notVals) {
+            if (er != null && !er.equals("") && er != "null") {
+                descript = descript + er + "|";
+            }
+        }
+        Errorer errorer = new Errorer(400, "BAD_REQUEST", false, descript);
         return new ResponseEntity<>(errorer, HttpStatus.BAD_REQUEST);
     }
 
