@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -45,7 +47,23 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<Object> Invalidity(MethodArgumentNotValidException e) {
-        Errorer errorer = new Errorer(400, "BAD_REQUEST", false, e.getMessage());
+        Pattern p1 = Pattern.compile("(Invalid{1})(\\D*)(\\Q]]\\E)");
+        Pattern p2 = Pattern.compile("(Invalid {1})(\\D{2,9})(\\Q]]\\E)(\\D+)(Invalid{1})(\\D*)(\\Q]]\\E)");
+        Pattern p3 = Pattern.compile("(Invalid {1})(\\D{2,9})(\\Q]]\\E)(\\D+)(Invalid{1})(\\D{2,9})(\\Q]]\\E)(\\D+)(Invalid{1})(\\D*)(\\Q]]\\E)");
+        Matcher m1 = p1.matcher(e.getMessage());
+        Matcher m2 = p2.matcher(e.getMessage());
+        Matcher m3 = p3.matcher(e.getMessage());
+        String descript = null;
+        if (m1.find()) {
+            descript = m1.group(1) + m1.group(2);
+        }
+        if (m2.find()) {
+            descript = m2.group(1) + m2.group(2) + ", " + m2.group(5) + m2.group(6);
+        }
+        if (m3.find()) {
+            descript = m3.group(1) + m3.group(2) + ", " + m3.group(5) + m3.group(6) + ", " + m3.group(9) + m3.group(10);
+        }
+        Errorer errorer = new Errorer(400, "BAD_REQUEST", false, /*e.getMessage()*/descript);
         return new ResponseEntity<>(errorer, HttpStatus.BAD_REQUEST);
     }
 
