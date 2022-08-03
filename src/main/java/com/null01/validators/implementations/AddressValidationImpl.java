@@ -6,14 +6,13 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class AddressValidationImpl implements ConstraintValidator<AddressValidation, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         Pattern p = Pattern.compile("(г. {1})(\\D*)(, ул. {1})(\\D*)(, д. {1})(\\d{1,4})");
-        Matcher m = p.matcher(value);
-        if (!value.equals("") && value.length() < 100) {
+        if (value != null && !value.equals("") && value.length() < 100) {
+            Matcher m = p.matcher(value);
             if (m.find()) {
                 return true;
             } else {
