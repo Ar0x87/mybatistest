@@ -30,10 +30,10 @@ public class UniversalDataProcessors {
                     while (resultSet.next()) {
                         Hotel hotel = new Hotel();
                         hotel.setId(resultSet.getInt("id"));
-                        hotel.setHotelName(resultSet.getString("hotelname"));
+                        hotel.setHotelname(resultSet.getString("hotelname"));
                         hotel.setAddress(resultSet.getString("address"));
                         hotels.add(hotel);
-                        log.debug("Add entry: " +hotel.getId() +" " +hotel.getHotelName() +" " +hotel.getAddress());
+                        log.debug("Add entry: " +hotel.getId() +" " +hotel.getHotelname() +" " +hotel.getAddress());
                     }
                     return hotels;
                 }
@@ -60,10 +60,10 @@ public class UniversalDataProcessors {
                     while (rs.next()) {
                         Hotel hotel = new Hotel();
                         hotel.setId(rs.getInt("id"));
-                        hotel.setHotelName(rs.getString("hotelname"));
+                        hotel.setHotelname(rs.getString("hotelname"));
                         hotel.setAddress(rs.getString("address"));
                         hotels.add(hotel);
-                        log.debug("Add entry: " +hotel.getId() +" " +hotel.getHotelName() +" " +hotel.getAddress());
+                        log.debug("Add entry: " +hotel.getId() +" " +hotel.getHotelname() +" " +hotel.getAddress());
 
                     }
                     return hotels;
@@ -90,10 +90,10 @@ public class UniversalDataProcessors {
                     while (rs.next()) {
                         Hotel hotel = new Hotel();
                         hotel.setId(rs.getInt("id"));
-                        hotel.setHotelName(rs.getString("hotelname"));
+                        hotel.setHotelname(rs.getString("hotelname"));
                         hotel.setAddress(rs.getString("address"));
                         hotels.add(hotel);
-                        log.debug("Add entry: " +hotel.getId() +" " +hotel.getHotelName() +" " +hotel.getAddress());
+                        log.debug("Add entry: " +hotel.getId() +" " +hotel.getHotelname() +" " +hotel.getAddress());
                     }
                     return hotels;
                 }

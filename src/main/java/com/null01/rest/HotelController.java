@@ -32,9 +32,9 @@ import org.springframework.web.bind.annotation.*;
  * @Since 09.06.2022
  */
 
-@RestController
+//@RestController
 @RequiredArgsConstructor
-@EnableResponseWrapper(wrapperClass = Wrapper.class)
+//@EnableResponseWrapper(wrapperClass = Wrapper.class)
 public class HotelController {
 
     @Autowired
