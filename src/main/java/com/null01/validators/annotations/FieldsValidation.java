@@ -17,7 +17,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface FieldsValidation {
 
-    String message() default "Empty request";
+    String message() default "Empty hotelname and address";
 
     Class<?>[] groups() default { };
 
