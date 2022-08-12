@@ -1,13 +1,11 @@
 package com.null01.rest;
 
 import com.null01.exceptions.*;
-import com.null01.annotations.EnableResponseWrapper;
 import com.null01.models.Hotel;
 import com.null01.requests.RequestStructure;
 import com.null01.requests.StructureForPatch;
 import com.null01.requests.StructureForPut;
 import com.null01.services.HotelService;
-import com.null01.wrappers.Wrapper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -106,7 +104,7 @@ public class HotelController {
 
     @DeleteMapping
     @RequestMapping(value = "/delJ", params = {"name"})
-    public ArrayList<Integer> delJ(@RequestParam(value = "name")String name) throws UnexistanceException, SQLException {
+    public ArrayList delJar(@RequestParam(value = "name")String name) throws UnexistanceException, SQLException {
         log.debug("*-----------------------------------------------------------------------------------------*");
         log.debug("Request received and passed to the service.");
         log.debug("Involved method REST_TYPE = DELETE");
@@ -114,7 +112,7 @@ public class HotelController {
         log.info("1 input parameter: name = " +name);
         log.info("EXPECTED_NUMBER_OF_RESULTS = ?");
         log.info("EXPECTED_TYPE_OF_RESULT = Integer");
-        return hotelService.delJ(name);
+        return hotelService.delJar(name);
     }
 
     @PatchMapping(value = "/patJ", consumes = MediaType.APPLICATION_JSON_VALUE)

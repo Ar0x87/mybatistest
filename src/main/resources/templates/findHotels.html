@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>findHotel</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+</head>
+
+<body>
+<h1> Searching Hotel </h1>
+<p class="tex">Write a name of searching hotel</p>
+<form th:action="@{/findHotels}" th:object="${name}" th:method="get">
+    <input type = "text" th:value="${name}" id="name" name="name" placeholder="Name"/>
+    <input type = "submit" value="Search" class="btnSum"/>
+</form>
+
+</body>
+</html>

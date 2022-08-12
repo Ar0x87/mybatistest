@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>foundResponse</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+</head>
+<body>
+<h1> Found Hotels </h1>
+<div>
+    <table border="5">
+        <tr>
+            <th> Id </th>
+            <th> Name </th>
+            <th> Address </th>
+        </tr>
+        <tr th:each="hotel : ${foundResponse}">
+            <td th:text="${hotel.id}"> Id </td>
+            <td th:text="${hotel.hotelname}"> Name </td>
+            <td th:text="${hotel.address}"> Address </td>
+        </tr>
+    </table>
+</div>
+<br><br/>
+<a href="hotels" class = "btn1"> Return to main page </a>
+<input type="button" onclick="history.back();" value="Back" class="btnBack"/>
+</body>
+</html>

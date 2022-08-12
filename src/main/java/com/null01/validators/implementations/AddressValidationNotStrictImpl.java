@@ -14,7 +14,9 @@ public class AddressValidationNotStrictImpl implements ConstraintValidator<Addre
         try {
             Pattern p = Pattern.compile("(г. {1})(\\D*)(, ул. {1})(\\D*)(, д. {1})(\\d{1,4})");
             Matcher m = p.matcher(value);
-            if (value.length() < 100) {
+            if (value.equals("")) {
+                return true;
+            } else if (value.length() < 101 && value.length() > 0) {
                 if (m.find()) {
                     return true;
                 } else {

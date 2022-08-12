@@ -10,7 +10,7 @@ public class FieldsValidationImpl implements ConstraintValidator<FieldsValidatio
 
     @Override
     public boolean isValid(StructureForPatch value, ConstraintValidatorContext context) {
-        if (value.getHotelname() == null && value.getAddress() == null) {
+        if ((value.getHotelname() == null || value.getHotelname().equals("")) && (value.getAddress() == null || value.getAddress().equals(""))) {
             return false;
         } else {
             return true;

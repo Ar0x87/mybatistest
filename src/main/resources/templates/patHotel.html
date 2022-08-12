@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>patHotel</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+</head>
+
+<body>
+<h1> Patch Hotel </h1>
+<p class="tex">Correct the required entry</p>
+<form th:action="@{/patHotel}" th:object="${hotelForm}" th:method="patch">
+    <input type = "text" th:field="*{id}" placeholder="Id"/>
+    <input type = "text" th:field="*{hotelname}" placeholder="Name"/>
+    <input type = "text" th:field="*{address}" placeholder="Address"/>
+
+    <input type = "submit" value="Patch" class="btnSum"/>
+</form>
+
+</body>
+</html>

@@ -9,7 +9,6 @@ import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.validation.Valid;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.function.BiConsumer;
@@ -51,6 +50,7 @@ public class UniversalDataProcessors {
 
     public ArrayList dataProcessor(ConnectionMinistry cm, String query, String name) throws SQLException {
         ArrayList<Hotel> hotels = new ArrayList<>();
+        hotels.clear();
         if (cm.isConnectionSuccess()) {
             log.debug("*-----------------------------------------------------------------------------------------*");
             try (PreparedStatement ps = cm.connect().prepareStatement(query)) {
@@ -64,7 +64,6 @@ public class UniversalDataProcessors {
                         hotel.setAddress(rs.getString("address"));
                         hotels.add(hotel);
                         log.debug("Add entry: " +hotel.getId() +" " +hotel.getHotelname() +" " +hotel.getAddress());
-
                     }
                     return hotels;
                 }
@@ -164,7 +163,7 @@ public class UniversalDataProcessors {
     //SQL alternators
 
     @SneakyThrows
-    public void poster(ConnectionMinistry cm, @Valid RequestStructure reqBod) {
+    public void poster(ConnectionMinistry cm, RequestStructure reqBod) {
         String sql = "SELECT setval('hotel_id_seq', (SELECT max(id) FROM hotel));" +
                 "INSERT INTO hotel(id, hotelname, address) VALUES (nextval('hotel_id_seq'), '"+ reqBod.getHotelname() +"' , '"+ reqBod.getAddress() +"' );";
         Connection con = cm.connect();

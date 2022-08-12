@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>putHotel</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+</head>
+
+<body>
+<h1> Put into Hotel</h1>
+<p class="tex">Override required entry</p>
+<form th:action="@{/putHotel}" th:object="${hotelForm}" th:method="put">
+    <input type = "text" th:field="*{id}" placeholder="Id"/>
+    <input type = "text" th:field="*{hotelname}" placeholder="Name"/>
+    <input type = "text" th:field="*{address}" placeholder="Address"/>
+
+    <input type = "submit" value="Put" class="btnSum"/>
+</form>
+
+</body>
+</html>

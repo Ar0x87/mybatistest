@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>delHotel</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+</head>
+
+<body>
+<h1> Deleting Hotel </h1>
+<p class="tex">Delete unnecessary entry</p>
+<p class="tex">Inline only Id or only Name, not both</p>
+<form th:action="@{/delHotel}" th:object="${delForm}" th:method="delete">
+    <input type = "text" th:field="*{id}" placeholder="Id"/>
+    <input type = "text" th:field="*{hotelname}" placeholder="Name"/>
+
+    <input type = "submit" value="Delete" class="btnSum"/>
+</form>
+
+</body>
+</html>

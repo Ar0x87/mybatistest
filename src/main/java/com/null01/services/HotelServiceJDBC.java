@@ -21,10 +21,9 @@ import java.util.ArrayList;
 
 import static java.lang.Integer.valueOf;
 
-@Primary
+//@Primary
 @RequiredArgsConstructor
 @Service
-@Valid
 public class HotelServiceJDBC implements HotelService {
 
     @Autowired
@@ -68,7 +67,7 @@ public class HotelServiceJDBC implements HotelService {
     //Main Logic of "additionalMethodLogic" branch
 
     @Override
-    public Integer postJ(@Valid RequestStructure reqBod) throws AlreadyExistException, SQLException {
+    public Integer postJ(RequestStructure reqBod) throws AlreadyExistException, SQLException {
         ArrayList<Integer> stp = getIdByName(reqBod.getHotelname());
         Integer rslt;
         log.debug("*-----------------------------------------------------------------------------------------*");
@@ -131,7 +130,7 @@ public class HotelServiceJDBC implements HotelService {
     }
 
     @Override
-    public ArrayList<Integer> delJ(String name) throws UnexistanceException, SQLException {
+    public ArrayList delJar(String name) throws UnexistanceException, SQLException {
         String sql = "SELECT id FROM hotel WHERE hotelname = ?";
         ArrayList arrayList = udp.dataProcessor(cm, sql, name, udp::delter);
         log.debug("*-----------------------------------------------------------------------------------------*");
@@ -161,21 +160,21 @@ public class HotelServiceJDBC implements HotelService {
             log.info("Try another id.");
             throw new MisstargetException("There is no such entry");
         } else {
-            if (reqLin.getHotelname() == null && reqLin.getAddress() == null) {
+            if ((reqLin.getHotelname() == null || reqLin.getHotelname().equals("")) && (reqLin.getAddress() == null || reqLin.getAddress().equals(""))) {
                 log.warn("There is no such entry.");
                 log.info("At least one field at least empty is required.");
                 throw new EmptyBodyException("Sending request is empty");
             } else {
                 StructureForPatch rsfl = reqLin;
-                if (reqLin.getHotelname() == null) {
+                if (reqLin.getHotelname() == null || reqLin.getHotelname().equals("")) {
                     rsfl.setHotelname(getHotelnameById(valueOf(reqLin.getId())));
                     udp.puter(cm, rsfl);
                 }
-                if (reqLin.getAddress() == null) {
+                if (reqLin.getAddress() == null || reqLin.getAddress().equals("")) {
                     rsfl.setAddress(getAddressById(valueOf(reqLin.getId())));
                     udp.puter(cm, rsfl);
                 }
-                if (reqLin.getHotelname() != null && reqLin.getAddress() != null) {
+                if ((reqLin.getHotelname() != null || !reqLin.getHotelname().equals("")) && (reqLin.getAddress() != null || !reqLin.getAddress().equals(""))) {
                     udp.puter(cm, reqLin);
                 }
                 rslt = checkIdExistance(valueOf(reqLin.getId()));

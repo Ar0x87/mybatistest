@@ -27,7 +27,7 @@ import static java.lang.Integer.valueOf;
  * @Since 09.06.2022
  */
 @RequiredArgsConstructor
-@Service
+//@Service
 public class HotelServiceImpl /*implements HotelService*/ {
 
     @Autowired
