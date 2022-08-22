@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class RequestStructure {
 
-    @NameValidation(message = "Invalid hotelname")
+    @NameValidation(message = "Invalid Name")
     private String hotelname;
 
-    @AddressValidation(message = "Invalid address")
+    @AddressValidation(message = "Invalid Address")
     private String address;
 
 }

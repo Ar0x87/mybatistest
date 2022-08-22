@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="page">
 <head>
 
     <title>hotels</title>
@@ -10,20 +10,30 @@
 
 </head>
 <body>
-    <h1> List of Hotels </h1>
-    <a href="hotels" class = "btn1"> Refresh </a>
-    <a href="findHotel" class = "btn1"> Find Hotel</a>
-    <a href="addHotel" class = "btn2"> Add Hotel </a>
-    <a href="putHotel" class = "btn3"> Put Hotel </a>
-    <a href="delHotel" class = "btn4"> Delete Hotel</a>
-    <a href="patHotel" class = "btn5"> Patch Hotel</a>
-    <br><br/>
+
+    <div class="loader">
+        <div class="loader_inner"></div>
+        <div class="loader_inner"></div>
+        <div class="loader_inner"></div>
+        <div class="loader_inner"></div>
+        <div class="loader_inner"></div>
+    </div>
+
+    <h1>ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM <br> COPYRIGHT 2075-2077 ROBCO INDUSTRIES <br> - Server 1 -<br><br></h1>
+    <h1>|--------------------------------------------------------- HOTEL MANAGER ---------------------------------------------------------|</h1>
+    <div align="center"><a href="hotels"> Refresh </a>
+    <a href="findHotel"> Find Hotel</a>
+    <a href="addHotel"> Add Hotel </a>
+    <a href="putHotel"> Put Hotel </a>
+    <a href="delHotel"> Delete Hotel</a>
+    <a href="patHotel"> Patch Hotel</a></div>
     <div>
-        <table border="5">
+        <h1><br>|---------------------------------------------------------- LIST OF HOTELS ----------------------------------------------------------|</h1>
+        <table>
             <tr>
-                <th> Id </th>
-                <th> Name </th>
-                <th> Address </th>
+                <th> Id: </th>
+                <th> Name: </th>
+                <th> Address: </th>
             </tr>
             <tr th:each="hotel : ${hotels}">
                 <td th:text="${hotel.id}"> Id </td>
@@ -32,5 +42,16 @@
             </tr>
         </table>
     </div>
+
+    <script>
+        window.onload = function () {
+            document.body.classList.add('loaded_hiding');
+            window.setTimeout(function () {
+                document.body.classList.add('loaded');
+                document.body.classList.remove('loaded_hiding');
+            }, 20000);
+        }
+    </script>
+
 </body>
 </html>

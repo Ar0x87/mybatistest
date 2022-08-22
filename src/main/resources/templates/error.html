@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="page">
+<head>
+
+  <title>error</title>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+</head>
+
+<body align="center">
+
+<div class="loader">
+  <div class="loader_inner"></div>
+  <div class="loader_inner"></div>
+  <div class="loader_inner"></div>
+  <div class="loader_inner"></div>
+  <div class="loader_inner"></div>
+</div>
+
+<h1>ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM <br> COPYRIGHT 2075-2077 ROBCO INDUSTRIES <br> - Server 1 -<br><br></h1>
+
+  <span class="erric">&#9888; ERROR OCCURED &#9888; <br><br></span>
+
+  <table>
+
+    <tr>
+      <th> Code: </th>
+      <th> Message: </th>
+      <th> Success: </th>
+      <th> Description: </th>
+    </tr>
+
+    <tr th:each="errorer : ${errorer}">
+      <td th:text="${errorer.code}" id="code" name="code"> code </td>
+      <td th:text="${errorer.message}" id="message" name="message"> message </td>
+      <td th:text="${errorer.success}" id="success" name="success"> success </td>
+      <td th:text="${errorer.description}" id="description" name="description"> description </td>
+    </tr>
+
+  </table>
+  <br><br>
+  <a href="hotels" class = "btnSum"> Return to main page </a>
+  <input type="button" onclick="history.back();" value="Back" class="btnSum"/>
+
+<script>
+  window.onload = function () {
+    document.body.classList.add('loaded_hiding');
+    window.setTimeout(function () {
+      document.body.classList.add('loaded');
+      document.body.classList.remove('loaded_hiding');
+    }, 1000);
+  }
+</script>
+
+</body>
+</html>

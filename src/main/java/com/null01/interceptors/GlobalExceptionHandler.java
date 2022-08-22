@@ -4,6 +4,7 @@ import com.null01.exceptions.*;
 import com.null01.wrappers.Errorer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,33 +20,38 @@ import java.util.regex.Pattern;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(AlreadyExistException.class)
-    protected ResponseEntity<Object> AlreadyExist(RuntimeException e) {
+    protected /*ResponseEntity<Object>*/ Errorer AlreadyExist(RuntimeException e) {
         Errorer errorer = new Errorer(412, "EXISTENCE_CONFLICT",  false, e.getMessage());
-        return new ResponseEntity<>(errorer, HttpStatus.I_AM_A_TEAPOT);
+        //return new ResponseEntity<>(errorer, HttpStatus.I_AM_A_TEAPOT);
+        return errorer;
     }
 
     @ExceptionHandler(EmptyBodyException.class)
-    protected ResponseEntity<Object> EmptyBody(RuntimeException e) {
+    protected /*ResponseEntity<Object>*/ Errorer EmptyBody(RuntimeException e) {
         Errorer errorer = new Errorer(406, "EMPTY_REQUEST_EXCEPTION", false, e.getMessage());
-        return new ResponseEntity<>(errorer, HttpStatus.BAD_REQUEST);
+        //return new ResponseEntity<>(errorer, HttpStatus.BAD_REQUEST);
+        return errorer;
     }
 
     @ExceptionHandler(MisstargetException.class)
-    protected ResponseEntity<Object> Misstarget(RuntimeException e) {
+    protected /*ResponseEntity<Object>*/ Errorer Misstarget(RuntimeException e) {
         Errorer errorer = new Errorer(416, "MISSTARGETING", false, e.getMessage());
-        return new ResponseEntity<>(errorer,HttpStatus.BAD_REQUEST);
+        //return new ResponseEntity<>(errorer,HttpStatus.BAD_REQUEST);
+        return errorer;
     }
 
     @ExceptionHandler({UnexistanceException.class, NumberFormatException.class})
-    protected ResponseEntity<Object> Unexistance(RuntimeException e) {
+    protected /*ResponseEntity<Object>*/ Errorer Unexistance(RuntimeException e) {
         Errorer errorer = new Errorer(404, "NOT_FOUND", false, e.getMessage());
-        return new ResponseEntity<>(errorer, HttpStatus.NOT_FOUND);
+        //return new ResponseEntity<>(errorer, HttpStatus.NOT_FOUND);
+        return errorer;
     }
 
     @ExceptionHandler({ConnectionLossException.class, SQLException.class})
-    protected ResponseEntity<Object> ConnectionLoss(SQLException e) {
+    protected /*ResponseEntity<Object>*/ Errorer ConnectionLoss(SQLException e) {
         Errorer errorer = new Errorer(500, "INTERNAL_SERVER_ERROR", false, e.getMessage());
-        return new ResponseEntity<>(errorer, HttpStatus.INTERNAL_SERVER_ERROR);
+        //return new ResponseEntity<>(errorer, HttpStatus.INTERNAL_SERVER_ERROR);
+        return errorer;
     }
 
     /*@ExceptionHandler(MethodArgumentNotValidException.class)
@@ -75,9 +81,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorer, HttpStatus.BAD_REQUEST);
     }*/
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    protected ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException e) {
-        String descript = "|";
+    @ExceptionHandler(/*MethodArgumentNotValidException.class*/BindException.class)
+    protected /*ResponseEntity<Object>*/ Errorer handleValidationExceptions(/*MethodArgumentNotValidException*/BindException e) {
+        String descript = "";
         ArrayList<String> notVals = new ArrayList<>();
         e.getBindingResult().getAllErrors().forEach((error) -> {
             String errorMessage = error.getDefaultMessage();
@@ -85,12 +91,20 @@ public class GlobalExceptionHandler {
         });
         for (String er : notVals) {
             if (er != null && !er.equals("") && er != "null") {
-                descript = descript + er + "|";
+                descript = descript + er + " ";
             }
         }
         Errorer errorer = new Errorer(400, "BAD_REQUEST", false, descript);
-        return new ResponseEntity<>(errorer, HttpStatus.BAD_REQUEST);
+        //return new ResponseEntity<>(errorer, HttpStatus.BAD_REQUEST);
+        return errorer;
     }
+
+    /*@ExceptionHandler(BindException.class)
+    protected Errorer handleBindExeptions(BindException e) {
+        Errorer errorer = new Errorer(404, "BAD_REQUEST", false, e.getMessage());
+        //return new ResponseEntity<>(errorer, HttpStatus.BAD_REQUEST);
+        return errorer;
+    }*/
 
     //Debug
 

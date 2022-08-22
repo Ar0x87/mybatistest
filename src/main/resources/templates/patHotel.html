@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="page">
 <head>
 
     <title>patHotel</title>
@@ -11,15 +11,67 @@
 </head>
 
 <body>
-<h1> Patch Hotel </h1>
-<p class="tex">Correct the required entry</p>
-<form th:action="@{/patHotel}" th:object="${hotelForm}" th:method="patch">
-    <input type = "text" th:field="*{id}" placeholder="Id"/>
-    <input type = "text" th:field="*{hotelname}" placeholder="Name"/>
-    <input type = "text" th:field="*{address}" placeholder="Address"/>
 
-    <input type = "submit" value="Patch" class="btnSum"/>
+<div class="loader">
+    <div class="loader_inner"></div>
+    <div class="loader_inner"></div>
+    <div class="loader_inner"></div>
+    <div class="loader_inner"></div>
+    <div class="loader_inner"></div>
+</div>
+
+<h1>ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM <br> COPYRIGHT 2075-2077 ROBCO INDUSTRIES <br> - Server 1 -<br></h1>
+<p class="tex">Correct required fields in entry</p>
+
+<form role="form" th:action="@{/patHotel}" th:object="${hotelForm}" th:method="patch" align="center">
+    <div>
+        <div>
+
+            <div th:classappend="${#fields.hasErrors('id')}? 'has-error'">
+                <label>
+                    Id<br><input type = "text" th:field="*{id}" autocomplete="off"/>
+                    <br>
+                    <span th:if="${#fields.hasErrors('id')}"class="err"><span class="erric">&#9888; Invalid ID</span><br>Id must be a number greater than zero</span>
+                </label>
+            </div>
+
+            <br>
+
+            <div th:classappend="${#fields.hasErrors('hotelname')}? 'has-error'">
+                <label>
+                    Name<br><input type = "text" th:field="*{hotelname}" autocomplete="off"/>
+                    <br>
+                    <span th:if="${#fields.hasErrors('hotelname')}" class="err"><span class="erric">&#9888; Invalid Name</span><br>Name must be between 2 and 50 characters</span>
+                </label>
+            </div>
+
+            <br>
+
+            <div th:classappend="${#fields.hasErrors('address')}? 'has-error'">
+                <label>
+                    Address<br><input type = "text" th:field="*{address}" autocomplete="off"/>
+                    <br>
+                    <span th:if="${#fields.hasErrors('address')}" class="err"><span class="erric">&#9888; Invalid Address</span><br>Address must match next pattern: г. Город, ул. Улица, д. [1..1000]<br>Address also must be less than 101 characters</span>
+                </label>
+            </div>
+
+            <br><br>
+
+            <input type = "submit" value="Patch" class="btnSum"/>
+
+        </div>
+    </div>
 </form>
+
+<script>
+    window.onload = function () {
+        document.body.classList.add('loaded_hiding');
+        window.setTimeout(function () {
+            document.body.classList.add('loaded');
+            document.body.classList.remove('loaded_hiding');
+        }, 1000);
+    }
+</script>
 
 </body>
 </html>

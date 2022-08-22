@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="page">
 <head>
 
     <title>findHotel</title>
@@ -12,12 +12,35 @@
 </head>
 
 <body>
-<h1> Searching Hotel </h1>
+
+<div class="loader">
+    <div class="loader_inner"></div>
+    <div class="loader_inner"></div>
+    <div class="loader_inner"></div>
+    <div class="loader_inner"></div>
+    <div class="loader_inner"></div>
+</div>
+
+<h1>ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM <br> COPYRIGHT 2075-2077 ROBCO INDUSTRIES <br> - Server 1 -<br><br></h1>
 <p class="tex">Write a name of searching hotel</p>
-<form th:action="@{/findHotels}" th:object="${name}" th:method="get">
-    <input type = "text" th:value="${name}" id="name" name="name" placeholder="Name"/>
+<form th:action="@{/findHotels}" th:object="${name}" th:method="get" align="center">
+
+    <label>
+        Name<br><input type = "text" th:value="${name}" id="name" name="name" autocomplete="off"/>
+    </label>
+
     <input type = "submit" value="Search" class="btnSum"/>
 </form>
+
+<script>
+    window.onload = function () {
+        document.body.classList.add('loaded_hiding');
+        window.setTimeout(function () {
+            document.body.classList.add('loaded');
+            document.body.classList.remove('loaded_hiding');
+        }, 1000);
+    }
+</script>
 
 </body>
 </html>

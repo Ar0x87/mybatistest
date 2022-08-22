@@ -10,13 +10,13 @@ import lombok.Data;
 @FieldsValidation
 public class StructureForPatch extends RequestStructureFullLine {
 
-    @IdValidation(message = "Invalid id")
+    @IdValidation(message = "Invalid ID")
     private String id;
 
-    @NameValidationNotStrict(message = "Invalid hotelname")
+    @NameValidationNotStrict(message = "Invalid Name")
     private String hotelname;
 
-    @AddressValidationNotStrict(message = "Invalid address")
+    @AddressValidationNotStrict(message = "Invalid Address")
     private String address;
 
 }

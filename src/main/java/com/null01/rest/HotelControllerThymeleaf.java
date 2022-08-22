@@ -1,31 +1,36 @@
 package com.null01.rest;
 
-import com.null01.models.Hotel;
 import com.null01.requests.RequestStructure;
 import com.null01.requests.StructureForDel;
 import com.null01.requests.StructureForPatch;
 import com.null01.requests.StructureForPut;
 import com.null01.services.HotelService;
+import com.null01.wrappers.Errorer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
 
 
 @Controller
-//@RestController
 @RequiredArgsConstructor
 public class HotelControllerThymeleaf {
 
     @Autowired
     private final HotelService hotelService;
+
+    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+    public String index(Model model) {
+        Errorer errorer = new Errorer(400, "BAD_REQUEST", false, "Wrong address");
+        model.addAttribute("errorer", errorer);
+        return "index";
+    }
 
     @RequestMapping(value = {"/hotels"}, method = RequestMethod.GET)
     public String getAll(Model model) throws SQLException {
@@ -40,7 +45,6 @@ public class HotelControllerThymeleaf {
         return "findHotels";
     }
 
-    //@GetMapping
     @RequestMapping(value = "/findHotels", method = RequestMethod.GET)
     public String findByName(Model model, @ModelAttribute("name") String name) throws SQLException {
         model.addAttribute("foundResponse", hotelService.getByName(name));
@@ -55,7 +59,10 @@ public class HotelControllerThymeleaf {
     }
 
     @RequestMapping(value = {"/addHotel"}, method = RequestMethod.POST)
-    public String postHotel(Model model, @ModelAttribute("hotelForm") @Valid RequestStructure hotelForm) throws SQLException {
+    public String postHotel(Model model, @ModelAttribute("hotelForm") @Valid RequestStructure hotelForm, Errors errors) throws SQLException {
+        if (errors.hasErrors()) {
+            return "addHotel";
+        }
         model.addAttribute("respondent", hotelService.postJ(hotelForm));
         return "respondentContent";
     }
@@ -94,7 +101,7 @@ public class HotelControllerThymeleaf {
     }
 
     @RequestMapping(value = {"/delHotel"}, method = RequestMethod.DELETE)
-    public String delHotel(Model model, @ModelAttribute("delForm") StructureForDel delForm) throws SQLException {
+    public String delHotel(Model model, @ModelAttribute("delForm") @Valid StructureForDel delForm) throws SQLException {
         ArrayList<Integer> respondent = new ArrayList<>();
         if (delForm.getId() != null && (delForm.getHotelname() == null || delForm.getHotelname().equals(""))) {
             respondent.add(hotelService.delJ(Integer.valueOf(delForm.getId())));

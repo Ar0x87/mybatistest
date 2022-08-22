@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="page">
 <head>
 
     <title>foundResponse</title>
@@ -9,10 +9,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 </head>
-<body>
-<h1> Found Hotels </h1>
+<body align="center">
+
+<div class="loader">
+    <div class="loader_inner"></div>
+    <div class="loader_inner"></div>
+    <div class="loader_inner"></div>
+    <div class="loader_inner"></div>
+    <div class="loader_inner"></div>
+</div>
+
+<h1>ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM <br> COPYRIGHT 2075-2077 ROBCO INDUSTRIES <br> - Server 1 -<br><br>
+    |-------------------------------------------------------------- Found Hotels ------------------------------------------------------------|</h1>
 <div>
-    <table border="5">
+    <table>
         <tr>
             <th> Id </th>
             <th> Name </th>
@@ -26,7 +36,18 @@
     </table>
 </div>
 <br><br/>
-<a href="hotels" class = "btn1"> Return to main page </a>
-<input type="button" onclick="history.back();" value="Back" class="btnBack"/>
+<a href="hotels"> Return to main page </a>
+<input type="button" onclick="history.back();" value="Back" class="btnSum"/>
+
+<script>
+    window.onload = function () {
+        document.body.classList.add('loaded_hiding');
+        window.setTimeout(function () {
+            document.body.classList.add('loaded');
+            document.body.classList.remove('loaded_hiding');
+        }, 1000);
+    }
+</script>
+
 </body>
 </html>

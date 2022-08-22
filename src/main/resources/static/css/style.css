@@ -1,69 +1,369 @@
-body {background-color: black}
+.page {background: repeating-linear-gradient(black 0%, #10977f 0.3%, black 0.6%),
+    radial-gradient(transparent 0, black 85%);
+    background-size: 1920px 1080px;
+    background-blend-mode: overlay;
+    animation: background 5s infinite alternate;
+    filter: blur(0.04rem)}
 
-.tex {color: green;
+@keyframes background {
+    0% {
+        background-position: 0 -25px;
+    }
+    100% {
+        background-position: 0 25px;
+    }
+}
+
+.erric {font-family: "Arial Narrow";
+        font-size: 38px;
+        font-weight: bold;
+        color: springgreen;
+        padding: 1px 15px 10px 15px;
+        animation: icon 1.5s infinite;
+}
+
+@keyframes icon {
+    0%, 10%, 20%, 80%, 90%, 100%
+    {color: white;
+        text-shadow:
+                0 0 4px springgreen,
+                0 0 8px springgreen;
+    -webkit-text-stroke: 0.1px springgreen}
+    29%, 30%, 70%, 71%
+    {color: white;
+        text-shadow:
+                0 0 2px red,
+                0 0 6px red,
+                0 0 12px red,
+                0 0 20px red,
+                0 0 40px red;
+        -webkit-text-stroke: 0.1px red;}
+}
+
+.err {font-family: "Arial Narrow";
+    font-size: 38px;
+    color: red;
     font-weight: bold;
-    font-family: "Bodoni MT";
-    font-size: 20px}
+    text-align: center;
+    text-shadow:
+    0 0 4px red,
+    0 0 8px red;}
 
-h1 {color: seagreen;
-    font-family: "Bodoni MT Black";
-    font-size: 40px}
-
-table {color: green;
-        font-family: "Century Gothic";
-        border: palegreen;
-        border-bottom-style: wave;
-        font-size: x-large}
-
-a {font-family: "Arial";
-    font-size: 20px;
-    color: black;
+.tex {color: springgreen;
+    font-family: "Arial Narrow";
+    font-size: 38px;
     font-weight: bold;
+    text-align: center;
+    text-shadow:
+            0 0 4px springgreen,
+            0 0 8px springgreen}
+
+h1 {color: springgreen;
+    font-family: "Arial Narrow";
+    text-align: center;
+    font-size: 38px;
+    text-shadow:
+    0 0 4px springgreen,
+    0 0 8px springgreen}
+
+label {color: springgreen;
+        font-family: "Arial Narrow";
+        font-weight: bold;
+        text-align: justify;
+        font-size: 38px;
+        text-shadow:
+            0 0 4px springgreen,
+            0 0 8px springgreen}
+
+table {color: springgreen;
+        font-family: "Arial Narrow";
+        font-weight: bold;
+        font-size: 38px;
+        border-radius: 9px;
+        text-shadow:
+            0 0 4px springgreen,
+            0 0 8px springgreen;
+        width: 1489px;
+        margin: auto;
+        text-align: center;
+        border-style: solid;
+        border-color: springgreen;
+        box-shadow:
+                inset 0 0 1px springgreen,
+                inset 0 0 2px springgreen,
+                inset 0 0 6px springgreen,
+                inset 0 0 10px springgreen,
+                0 0 1px springgreen,
+                0 0 2px springgreen,
+                0 0 6px springgreen,
+                0 0 10px springgreen}
+
+
+a {font-family: "Arial Narrow";
+    font-weight: bold;
+    font-size: 38px;
+    text-shadow:
+            0 0 1px springgreen,
+            0 0 2px springgreen,
+            0 0 6px springgreen,
+            0 0 10px springgreen;
+    color: springgreen;
     text-decoration: none;
     display: inline-block;
-    padding: 1rem 1rem;
-    border-radius: 100px;
+    border-style: solid;
+    border-radius: 9px;
+    box-shadow:
+        inset 0 0 1px springgreen,
+        inset 0 0 2px springgreen,
+        inset 0 0 6px springgreen,
+        inset 0 0 10px springgreen,
+        0 0 1px springgreen,
+        0 0 2px springgreen,
+        0 0 3px springgreen,
+        0 0 4px springgreen,
+        0 0 8px springgreen;
+    margin: 3px;
+    padding: 0.3rem 2.6rem}
+
+a:hover {
+    color: black;
+    text-shadow:
+            0 0 1px black;
+    mix-blend-mode: screen;
+    border-color: springgreen;
+    background: springgreen;
+    box-shadow:
+            0 0 1px springgreen,
+            0 0 2px springgreen,
+            0 0 3px springgreen,
+            0 0 4px springgreen,
+            0 0 8px springgreen,
+            0 0 14px springgreen,
+            0 0 22px springgreen,
+            0 0 45px springgreen;
+}
+
+input[type=text]{
+    background-color: transparent;
+    color: springgreen;
+    font-family: "Arial Narrow";
+    font-size: 38px;
     font-weight: bold;
-    -webkit-text-stroke-color: white;
-    -webkit-text-stroke-width: 0.8px;
-    border-style: double;
-    border-width: 8px}
+    justify-content: inherit;
+    text-shadow:
+            0 0 4px springgreen,
+            0 0 8px springgreen;
+    border-color: springgreen;
+    border-style: solid;
+    border-width: 2px;
+    padding: 0.3rem 1rem;
+    border-radius: 9px;
+    box-shadow:
+            inset 0 0 1px springgreen,
+            inset 0 0 2px springgreen,
+            inset 0 0 6px springgreen,
+            inset 0 0 10px springgreen,
+            0 0 1px springgreen,
+            0 0 2px springgreen,
+            0 0 3px springgreen,
+            0 0 4px springgreen,
+            0 0 8px springgreen;
+    margin: 4px;
+    text-align: center;
+    width: 1000px;
+}
 
-.btn1 {background-color: green}
+input[type=text]:focus {
+    background-color: transparent;
+    outline: none;
+    color: springgreen;
+    font-family: "Arial Narrow";
+    font-size: 38px;
+    font-weight: bold;
+    justify-content: inherit;
+    text-shadow:
+            0 0 4px springgreen,
+            0 0 8px springgreen;
+    border-color: springgreen;
+    border-style: solid;
+    border-width: 2px;
+    padding: 0.3rem 1rem;
+    border-radius: 9px;
+    box-shadow:
+            inset 0 0 1px springgreen,
+            inset 0 0 2px springgreen,
+            inset 0 0 6px springgreen,
+            inset 0 0 10px springgreen,
+            0 0 1px springgreen,
+            0 0 2px springgreen,
+            0 0 3px springgreen,
+            0 0 4px springgreen,
+            0 0 8px springgreen,
+            0 0 14px springgreen,
+            0 0 22px springgreen,
+            0 0 45px springgreen;
+    margin: 4px;
+    text-align: center;
+    width: 1000px;
+}
 
-.btn2 {background-color: cornflowerblue}
+input[type=text]:disabled {
+    color: yellow;
+    border-color: yellow;
+    border-style: solid;
+    border-width: 2px;
+    padding: 0.3rem 1rem;
+    border-radius: 9px;
+    box-shadow:
+            inset 0 0 1px yellow,
+            inset 0 0 2px yellow,
+            inset 0 0 6px yellow,
+            inset 0 0 10px yellow,
+            0 0 1px yellow,
+            0 0 2px yellow,
+            0 0 3px yellow,
+            0 0 4px yellow,
+            0 0 8px yellow;
+    margin: 4px;
+    text-align: center;
+    width: 1000px;
+    background: repeating-linear-gradient(-45deg, rgba(0,0,0,70%), rgba(0,0,0,70%) 5%, rgba(255,255,0,70%) 5%, rgba(255,255,0,70%) 10%);
+    background-size: 200% 200%;
+    animation: strips 30s linear infinite;
+}
 
-.btn3 {background-color: yellowgreen}
+@keyframes strips {
+    100% {
+        background-position: 100% 100%;
+    }
+}
 
-.btn4 {background-color: darkred}
+.btnSum {font-family: "Arial Narrow";
+    font-size: 38px;
+    font-weight: bold;
+    text-shadow:
+            0 0 1px springgreen,
+            0 0 2px springgreen,
+            0 0 6px springgreen,
+            0 0 10px springgreen;
+    color: springgreen;
+    text-decoration: none;
+    display: inline-block;
+    border-style: solid;
+    border-color: springgreen;
+    border-width: 3.55px;
+    border-radius: 9px;
+    background-color: transparent;
+    box-shadow:
+            inset 0 0 1px springgreen,
+            inset 0 0 2px springgreen,
+            inset 0 0 6px springgreen,
+            inset 0 0 10px springgreen,
+            0 0 1px springgreen,
+            0 0 2px springgreen,
+            0 0 3px springgreen,
+            0 0 4px springgreen,
+            0 0 8px springgreen;
+    margin: 3px;
+    padding: 0.3rem 2.88rem}
 
-.btn5 {background-color: darkorange}
+.btnSum:hover {
+    color: black;
+    text-shadow:
+            0 0 1px black;
+    mix-blend-mode: screen;
+    border-color: springgreen;
+    background: springgreen;
+    box-shadow:
+            0 0 1px springgreen,
+            0 0 2px springgreen,
+            0 0 3px springgreen,
+            0 0 4px springgreen,
+            0 0 8px springgreen,
+            0 0 14px springgreen,
+            0 0 22px springgreen,
+            0 0 45px springgreen;
+}
 
-.btnSum {color: black;
-        border-color: yellow;
-        border-radius: 10px;
-        display: inline-block;
-        padding: 1px 5px;
-        background-color: green;
-        font-family: "Arial";
-        font-weight: bold;
-        font-size: 20px;
-        -webkit-text-stroke: 0.05ex;
-        -webkit-text-stroke-color: yellow}
 
-.btnBack {
-        font-family: "Arial";
-        font-size: 20px;
-        color: black;
-        font-weight: bold;
-        text-decoration: none;
-        display: inline-block;
-        padding: 1rem 1rem;
-        border-radius: 100px;
-        font-weight: bold;
-        -webkit-text-stroke-color: white;
-        -webkit-text-stroke-width: 0.8px;
-        border-style: double;
-        border-width: 8px;
-        background-color: green;
-        border-color: black}
+.loader {
+    display: -webkit-flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1080px;
+    background: repeating-linear-gradient(black 0%, #10977f 0.3%, black 0.6%),
+    radial-gradient(transparent 0, black 85%);
+    background-blend-mode: overlay;
+    animation: background 5s infinite alternate;
+    filter: blur(0.04rem);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.loader_inner {
+    position: absolute;
+    animation: ripple 5s infinite ease-out;
+    border-radius: 100%;
+    border-style: solid;
+    border-width: 4px;
+    border-color: springgreen;
+    box-shadow:
+            inset 0 0 1px springgreen,
+            inset 0 0 2px springgreen,
+            inset 0 0 6px springgreen,
+            inset 0 0 10px springgreen,
+            0 0 1px springgreen,
+            0 0 2px springgreen,
+            0 0 3px springgreen,
+            0 0 4px springgreen,
+            0 0 8px springgreen;
+    background: transparent;
+    opacity: 0;
+    z-index: 2000;
+    filter: blur(0.04rem);
+}
+
+@keyframes ripple {
+    0% {
+        width: 1px;
+        height: 4px;
+        opacity: 1;
+    }
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+.loader .loader_inner:nth-child(1) {
+    animation-delay: 0ms;
+}
+
+.loader .loader_inner:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.loader .loader_inner:nth-child(3) {
+    animation-delay: 2s;
+}
+
+.loader .loader_inner:nth-child(4) {
+    animation-delay: 3s;
+}
+
+.loader .loader_inner:nth-child(5) {
+    animation-delay: 4s;
+}
+
+.loaded_hiding .loader {
+    transition: 15s opacity;
+    opacity: 100%;
+}
+
+.loaded .loader {
+    display: none;
+}

@@ -8,13 +8,13 @@ import lombok.Data;
 @Data
 public class StructureForPut extends RequestStructureFullLine {
 
-    @IdValidation(message = "Invalid id")
+    @IdValidation(message = "Invalid ID")
     private String id;
 
-    @NameValidation(message = "Invalid hotelname")
+    @NameValidation(message = "Invalid Name")
     private String hotelname;
 
-    @AddressValidation(message = "Invalid address")
+    @AddressValidation(message = "Invalid Name")
     private String address;
 
 }
